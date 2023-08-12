@@ -1,3 +1,3 @@
 rootProject.name = "PRWeather"
-include(":app")
+include(":app", ":data", ":domain")
  
