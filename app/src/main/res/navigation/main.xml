@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/fragmentCitySelector">
+
+    <fragment
+        android:id="@+id/fragmentCitySelector"
+        android:name="com.gahov.prweather.feature.selector.CitySelectorFragment"
+        tools:layout="@layout/fragment_city_selector">
+
+        <action
+            android:id="@+id/actionCitySelectorToCityHistory"
+            app:destination="@id/fragmentCityHistory"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/fragmentCitySelector" />
+
+        <action
+            android:id="@+id/actionCitySelectorToCityDetails"
+            app:destination="@id/fragmentCityWeatherDetails"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/fragmentCitySelector" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentCityHistory"
+        android:name="com.gahov.prweather.feature.history.WeatherHistoryFragment"
+        tools:layout="@layout/fragment_city_history">
+
+        <action
+            android:id="@+id/actionCityHistoryToCityDetails"
+            app:destination="@id/fragmentCityWeatherDetails"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/fragmentCityHistory" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentCityWeatherDetails"
+        android:name="com.gahov.prweather.feature.details.CityWeatherDetailsFragment"
+        tools:layout="@layout/fragment_city_weather_details" />
+
+</navigation>

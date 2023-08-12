@@ -30,7 +30,7 @@ class NetworkModule {
     @Provides
     @Singleton
     internal fun provideNetworkFactory(
-        configuration: NetworkConfiguration.AuthConfiguration,
+        configuration: NetworkConfiguration.DefaultConfiguration,
         interceptor: DefaultInterceptorProvider
     ): NetworkFactory {
         return NetworkFactory(
@@ -42,7 +42,7 @@ class NetworkModule {
     @Provides
     @Singleton
     internal fun provideDefaultInterceptor(
-        configuration: NetworkConfiguration.AuthConfiguration,
+        configuration: NetworkConfiguration.DefaultConfiguration,
         userAgent: UserAgentProvider,
         logger: Logger,
     ) = DefaultInterceptorProvider(
@@ -56,8 +56,7 @@ class NetworkModule {
     internal fun provideDefaultAuthConfiguration(
         tokenProvider: TokenProvider,
         urlProvider: UrlProvider,
-    ) = NetworkConfiguration.AuthConfiguration(
-        tokenProvider = tokenProvider,
+    ) = NetworkConfiguration.DefaultConfiguration(
         serverUrlProvider = urlProvider,
     )
 
@@ -90,7 +89,7 @@ class NetworkModule {
     @Provides
     @Reusable
     internal fun provideNewsProtocol(
-        configuration: NetworkConfiguration.AuthConfiguration,
+        configuration: NetworkConfiguration.DefaultConfiguration,
         interceptor: DefaultInterceptorProvider
     ): WeatherProtocol {
         return NetworkFactory.createService(

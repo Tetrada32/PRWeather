@@ -13,4 +13,8 @@ sealed class NetworkConfiguration {
     open val withLogs = true
 
     open val converterFactoryProvider: ConverterFactoryProvider = KotlinConverterFactory()
+
+    class DefaultConfiguration(
+        override val serverUrlProvider: UrlProvider,
+    ) : NetworkConfiguration()
 }
