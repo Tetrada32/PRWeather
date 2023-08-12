@@ -10,7 +10,12 @@ import dagger.hilt.components.SingletonComponent
 
 @Module(
     includes = [
+        RepositoryModule::class,
+        SourceModule::class,
+        MapperModule::class,
         ViewModelModule::class,
+        LoggerModule::class,
+        SharedPreferencesModule::class
     ]
 )
 @InstallIn(SingletonComponent::class)
