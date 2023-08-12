@@ -39,7 +39,7 @@ data class WeatherDataResponse(
     val id: Int? = null,
 
     @SerializedName("name")
-    val cityName: String? = null,
+    val name: String? = null,
 
     @SerializedName("cod")
     val code: Int? = null

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">PRWeather</string>
     <string name="citiesSelectorScreenTitle">Cities</string>
+    <string name="field_description">Description</string>
+    <string name="field_temperature">Temperature</string>
+    <string name="field_humidity">Humidity</string>
+    <string name="field_windspeed">Windspeed</string>
+    <string name="field_weather_date">Weather information for %1$s received on\n%2$s</string>
 </resources>

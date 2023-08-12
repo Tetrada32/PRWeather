@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.gahov.prweather.feature.details.entity.WeatherDetailsFieldModel" />
+    </data>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/grid_10">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemWeatherDetailsField"
+            style="@style/TextAppearance.PlanRadarWeather.Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/grid_32"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textColor="@color/black"
+            app:setText="@{model.field}"
+            tools:text="Temperature" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemWeatherDetailsValue"
+            style="@style/TextAppearance.PlanRadarWeather.Headline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/grid_32"
+            android:layout_weight="1"
+            android:gravity="end"
+            app:setText="@{model.value}"
+            tools:text="20.0 (c)" />
+    </LinearLayout>
+</layout>

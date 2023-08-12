@@ -13,7 +13,9 @@ import com.gahov.prweather.R
 fun ImageView.loadImage(
     url: String?, crossfade: Boolean = true
 ) = load(url.toString()) {
+    val placeholder = getProgressPlaceholder(context)
     crossfade(crossfade)
+    error(placeholder)
     placeholder(getProgressPlaceholder(context))
 }
 

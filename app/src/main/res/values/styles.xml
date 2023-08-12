@@ -8,6 +8,14 @@
         <item name="android:letterSpacing">0.0</item>
     </style>
 
+
+    <style name="TextAppearance.PlanRadarWeather.Headline2" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/lato_regular</item>
+        <item name="android:textSize">@dimen/text_size_h2</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:letterSpacing">0.0</item>
+    </style>
+
     <style name="TextAppearance.PlanRadarWeather.Subtitle" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="fontFamily">@font/lato_bold</item>
         <item name="android:textSize">@dimen/text_size_h3</item>
@@ -15,5 +23,10 @@
         <item name="android:letterSpacing">0.0</item>
     </style>
 
-
+    <style name="TextAppearance.PlanRadarWeather.Text.Small" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/lato_regular</item>
+        <item name="android:textSize">@dimen/text_size_h4</item>
+        <item name="android:textColor">@color/colorGrey</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
 </resources>

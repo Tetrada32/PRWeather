@@ -5,7 +5,9 @@ data class WeatherEntity(
     val cityName: String? = null,
     val countryName: String? = null,
     val weatherDescription: String? = null,
-    val temperatureCelsius: Double? = null,
+    val temperatureKelvin: Double? = null,
     val humidity: Int? = null,
-    val windSpeed: Double? = null
+    val windSpeed: Double? = null,
+    val iconId: String? = null,
+    val time: String? = null
 )

@@ -1,8 +1,15 @@
 package com.gahov.prweather.feature.details
 
+import android.os.Bundle
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gahov.prweather.R
+import com.gahov.prweather.arch.router.command.Command
 import com.gahov.prweather.arch.ui.fragment.BaseFragment
 import com.gahov.prweather.databinding.FragmentCityWeatherDetailsBinding
+import com.gahov.prweather.feature.details.adapter.WeatherDetailsFieldsAdapter
+import com.gahov.prweather.feature.details.command.CityWeatherDetailsCommand
+import com.gahov.prweather.feature.details.entity.WeatherDetailsDataModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -11,4 +18,37 @@ class CityWeatherDetailsFragment :
         contentLayoutID = R.layout.fragment_city_weather_details,
         viewModelClass = CityWeatherDetailsViewModel::class.java
     ) {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupAdapter()
+        viewModel.loadWeatherContent()
+    }
+
+    override fun handleFeatureCommand(command: Command.FeatureCommand) {
+        with(command) {
+            if (this is CityWeatherDetailsCommand) {
+                when (this) {
+                    is CityWeatherDetailsCommand.DisplayContent -> displayContent(content)
+                    is CityWeatherDetailsCommand.OnNetworkError -> displayError(failure)
+                }
+            } else {
+                super.handleFeatureCommand(command)
+            }
+        }
+    }
+
+    private val weatherDetailsFieldsAdapter: WeatherDetailsFieldsAdapter by lazy {
+        WeatherDetailsFieldsAdapter()
+    }
+
+    private fun setupAdapter() {
+        binding.WeatherDetailsFieldList.layoutManager = LinearLayoutManager(requireContext())
+        binding.WeatherDetailsFieldList.adapter = weatherDetailsFieldsAdapter
+    }
+
+    private fun displayContent(content: WeatherDetailsDataModel) {
+        binding.model = content
+        weatherDetailsFieldsAdapter.items = content.weatherFields ?: emptyList()
+    }
 }
