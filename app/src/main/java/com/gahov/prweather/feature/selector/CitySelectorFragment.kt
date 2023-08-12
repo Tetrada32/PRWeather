@@ -58,7 +58,7 @@ class CitySelectorFragment :
 
     private fun setupScrollingAnimation() {
         with(binding) {
-            goodieListAppBarLayout.addOnOffsetChangedListener(object :
+            citySelectorAppBarLayout.addOnOffsetChangedListener(object :
                 AppBarOffsetChangeListener() {
                 override fun onHide() {
                     hideViews()

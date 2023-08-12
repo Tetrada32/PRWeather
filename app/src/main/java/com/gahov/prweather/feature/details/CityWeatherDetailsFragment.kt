@@ -19,6 +19,10 @@ class CityWeatherDetailsFragment :
         viewModelClass = CityWeatherDetailsViewModel::class.java
     ) {
 
+    private val weatherDetailsFieldsAdapter: WeatherDetailsFieldsAdapter by lazy {
+        WeatherDetailsFieldsAdapter()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
@@ -37,10 +41,6 @@ class CityWeatherDetailsFragment :
                 super.handleFeatureCommand(command)
             }
         }
-    }
-
-    private val weatherDetailsFieldsAdapter: WeatherDetailsFieldsAdapter by lazy {
-        WeatherDetailsFieldsAdapter()
     }
 
     private fun setupAdapter() {
