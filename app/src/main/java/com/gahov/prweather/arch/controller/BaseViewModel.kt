@@ -4,10 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavDirections
 import com.gahov.prweather.arch.coroutine.CoroutineLauncher
 import com.gahov.prweather.arch.coroutine.impl.DefaultCoroutineLauncher
 import com.gahov.prweather.arch.lifecycle.SingleLiveEvent
 import com.gahov.prweather.arch.provider.CoroutineProvider
+import com.gahov.prweather.arch.router.command.Command
+import com.gahov.prweather.arch.router.command.NavDirection
+import com.gahov.prweather.arch.ui.view.model.TextProvider
 import com.gahov.prweather.domain.entities.failure.Failure
 import kotlinx.coroutines.CoroutineScope
 
@@ -20,19 +24,46 @@ abstract class BaseViewModel : ViewModel(), Controller, CoroutineProvider {
         )
     }
 
+    private val _message by lazy { SingleLiveEvent<TextProvider>() }
+    val message: LiveData<TextProvider>
+        get() = _message
+
     private val _errorEvent by lazy { SingleLiveEvent<Failure>() }
     val errorEvent: LiveData<Failure>
         get() = _errorEvent
+
+    private val _command by lazy { SingleLiveEvent<Command>() }
+    val command: LiveData<Command>
+        get() = _command
 
     private val _isLoading by lazy { MutableLiveData(false) }
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
+    private val _navigationCommand by lazy { SingleLiveEvent<Command>() }
+    val navigationCommand: LiveData<Command>
+        get() = _navigationCommand
+
+    open fun handleCommand(command: Command) {
+        _command.postValue(command)
+    }
+
     fun launch(block: suspend CoroutineScope.() -> Unit) = launcher.launch(block = block)
 
+    override fun showMessage(message: TextProvider) {
+        _message.value = message
+    }
 
     override fun setLoading(boolean: Boolean) {
         _isLoading.value = boolean
+    }
+
+    override fun navigate(command: Command) {
+        _navigationCommand.value = command
+    }
+
+    fun navigateDirection(directions: NavDirections) {
+        handleCommand(NavDirection.Direction(directions))
     }
 
     override fun handleFailure(failure: Failure) {

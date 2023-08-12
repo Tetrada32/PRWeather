@@ -8,11 +8,12 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gahov.prweather.R
+import com.gahov.prweather.arch.router.command.Command
 import com.gahov.prweather.arch.ui.fragment.BaseFragment
-import com.gahov.prweather.arch.ui.view.model.TextProvider
 import com.gahov.prweather.common.ui.AppBarOffsetChangeListener
 import com.gahov.prweather.databinding.FragmentCitySelectorBinding
 import com.gahov.prweather.feature.selector.adapter.CityListAdapter
+import com.gahov.prweather.feature.selector.command.CitySelectorCommand
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,18 +31,20 @@ class CitySelectorFragment :
         super.onViewCreated(view, savedInstanceState)
         setupScrollingAnimation()
         setupAdapter()
+    }
 
-        //TODO replace mocked data with real
-        displayContent(
-            listOf(
-                CityModel.CityItem(
-                    locationName = TextProvider.Text("Vienna, AT")
-                ),
-                CityModel.CityItem(
-                    locationName = TextProvider.Text("Kiev, UA")
-                )
-            )
-        )
+    override fun handleFeatureCommand(command: Command.FeatureCommand) {
+        with(command) {
+            if (this is CitySelectorCommand) {
+                when (this) {
+                    is CitySelectorCommand.DisplayContent -> displayContent(content)
+                    is CitySelectorCommand.NavigateToDetails -> navigateToDetails()
+                    is CitySelectorCommand.NavigateToHistory -> navigateToHistory()
+                }
+            } else {
+                super.handleFeatureCommand(command)
+            }
+        }
     }
 
     private fun setupAdapter() {

@@ -12,11 +12,18 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.gahov.prweather.arch.component.error.ErrorHandler
 import com.gahov.prweather.arch.controller.BaseViewModel
+import com.gahov.prweather.arch.provider.RouterProvider
+import com.gahov.prweather.arch.router.NavComponentRouter
+import com.gahov.prweather.arch.router.Router
+import com.gahov.prweather.arch.router.command.Command
+import com.gahov.prweather.arch.router.command.NavDirection
 import com.gahov.prweather.arch.ui.view.BaseView
 import com.gahov.prweather.arch.ui.view.model.TextProvider
 import com.gahov.prweather.common.ui.ktx.getString
+import com.gahov.prweather.domain.component.logger.Level
 import com.gahov.prweather.domain.component.logger.Logger
 import com.gahov.prweather.domain.entities.failure.Failure
 import javax.inject.Inject
@@ -24,7 +31,7 @@ import javax.inject.Inject
 abstract class BaseFragment<B : ViewDataBinding, T : ViewModel>(
     @LayoutRes private val contentLayoutID: Int,
     private val viewModelClass: Class<T>,
-) : Fragment(), BaseView {
+) : Fragment(), BaseView, RouterProvider {
 
     protected lateinit var binding: B
         private set
@@ -39,6 +46,13 @@ abstract class BaseFragment<B : ViewDataBinding, T : ViewModel>(
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    override val router: Router by lazy {
+        NavComponentRouter(
+            navController = findNavController(),
+            logger = logger
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,13 +75,59 @@ abstract class BaseFragment<B : ViewDataBinding, T : ViewModel>(
         setObservers()
     }
 
-    protected open fun setBaseObservers() {
-        getCurrentViewModel()?.errorEvent?.observe(viewLifecycleOwner, ::displayError)
-    }
-
     open fun logMessage(message: TextProvider.Text) {
         logger.log(
             message = message.text
+        )
+    }
+
+    protected open fun navigate(command: Command) {
+        when (command) {
+            is NavDirection -> router.navigate(command)
+            Command.Back -> router.popBackStack()
+            Command.Root -> router.popToRoot()
+            Command.Close -> requireActivity().finish()
+            is Command.FeatureCommand -> navigateByFeature(command)
+            is Command.Route -> commandError(command)
+        }
+    }
+
+    protected open fun setBaseObservers() {
+        getCurrentViewModel()?.let {
+            it.errorEvent.observe(viewLifecycleOwner, ::displayError)
+            it.command.observe(viewLifecycleOwner, ::handleCommandData)
+            it.message.observe(viewLifecycleOwner, ::showMessage)
+        }
+    }
+
+    protected open fun handleCommandData(command: Command) {
+        when (command) {
+            is NavDirection -> router.navigate(command)
+            Command.Back -> router.popBackStack()
+            Command.Root -> router.popToRoot()
+            Command.Close -> requireActivity().finish()
+            is Command.FeatureCommand -> handleFeatureCommand(command)
+            is Command.Route -> commandError(command)
+        }
+    }
+
+    protected open fun handleFeatureCommand(command: Command.FeatureCommand) {
+        logger.log(
+            level = Level.Warning, "method navigateByFeature isn't implement for $command"
+        )
+    }
+
+    protected open fun navigateByFeature(command: Command.FeatureCommand) {
+        logger.log(
+            level = Level.Warning,
+            message = "method navigateByFeature isn't implement for $command"
+        )
+    }
+
+    private fun commandError(command: Command) {
+        logger.log(
+            level = Level.Warning,
+            message = "navigation isn't implement for $command"
         )
     }
 
