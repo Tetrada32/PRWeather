@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PRWeather</string>
+    <string name="citiesSelectorScreenTitle">Cities</string>
 </resources>

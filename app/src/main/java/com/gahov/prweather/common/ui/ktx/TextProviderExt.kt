@@ -1,4 +1,4 @@
-package com.gahov.prweather.arch.ktx
+package com.gahov.prweather.common.ui.ktx
 
 import android.content.Context
 import com.gahov.prweather.arch.ui.view.model.TextProvider

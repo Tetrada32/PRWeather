@@ -2,10 +2,17 @@ package com.gahov.prweather.feature.selector
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gahov.prweather.R
 import com.gahov.prweather.arch.ui.fragment.BaseFragment
+import com.gahov.prweather.arch.ui.view.model.TextProvider
+import com.gahov.prweather.common.ui.AppBarOffsetChangeListener
 import com.gahov.prweather.databinding.FragmentCitySelectorBinding
+import com.gahov.prweather.feature.selector.adapter.CityListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,11 +22,66 @@ class CitySelectorFragment :
         viewModelClass = CitySelectorViewModel::class.java
     ) {
 
+    private val cityListAdapter: CityListAdapter by lazy {
+        CityListAdapter(presenter = viewModel)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupScrollingAnimation()
+        setupAdapter()
 
-        binding.detailsButton.setOnClickListener { navigateToDetails() }
-        binding.historyButton.setOnClickListener { navigateToHistory() }
+        //TODO replace mocked data with real
+        displayContent(
+            listOf(
+                CityModel.CityItem(
+                    locationName = TextProvider.Text("Vienna, AT")
+                ),
+                CityModel.CityItem(
+                    locationName = TextProvider.Text("Kiev, UA")
+                )
+            )
+        )
+    }
+
+    private fun setupAdapter() {
+        binding.citiesSelectorList.layoutManager = LinearLayoutManager(requireContext())
+        binding.citiesSelectorList.adapter = cityListAdapter
+    }
+
+    private fun displayContent(content: List<CityModel>) {
+        cityListAdapter.items = content
+    }
+
+    private fun setupScrollingAnimation() {
+        with(binding) {
+            goodieListAppBarLayout.addOnOffsetChangedListener(object :
+                AppBarOffsetChangeListener() {
+                override fun onHide() {
+                    hideViews()
+                }
+
+                override fun onShow() {
+                    showViews()
+                }
+            })
+        }
+    }
+
+    private fun hideViews() {
+        binding.citiesSelectorToolbar.animate()
+            .translationY((-binding.citiesSelectorToolbar.height).toFloat()).interpolator =
+            AccelerateInterpolator(2F)
+    }
+
+    private fun showViews() {
+        if (!binding.citiesSelectorToolbar.isVisible) {
+            val valueInPixels = resources.getDimension(R.dimen.grid_56)
+            binding.citiesSelectorToolbar.y = -valueInPixels
+            binding.citiesSelectorToolbar.visibility = View.VISIBLE
+        }
+        binding.citiesSelectorToolbar.animate().translationY(0F).interpolator =
+            DecelerateInterpolator(2F)
     }
 
     private fun navigateToDetails() {

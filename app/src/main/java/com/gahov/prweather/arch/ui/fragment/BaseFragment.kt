@@ -14,9 +14,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.gahov.prweather.arch.component.error.ErrorHandler
 import com.gahov.prweather.arch.controller.BaseViewModel
-import com.gahov.prweather.arch.ktx.getString
 import com.gahov.prweather.arch.ui.view.BaseView
 import com.gahov.prweather.arch.ui.view.model.TextProvider
+import com.gahov.prweather.common.ui.ktx.getString
 import com.gahov.prweather.domain.component.logger.Logger
 import com.gahov.prweather.domain.entities.failure.Failure
 import javax.inject.Inject
