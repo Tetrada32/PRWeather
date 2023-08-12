@@ -1,5 +1,6 @@
 package com.gahov.prweather.arch.di.module
 
+import com.gahov.prweather.data.mapper.weather.local.WeatherDomainToLocalMapper
 import com.gahov.prweather.data.mapper.weather.remote.WeatherResponseToDomainMapper
 import dagger.Module
 import dagger.Provides
@@ -15,4 +16,9 @@ class MapperModule {
     @Singleton
     internal fun provideWeatherRemoteMapper(): WeatherResponseToDomainMapper =
         WeatherResponseToDomainMapper()
+
+    @Provides
+    @Singleton
+    internal fun provideWeatherLocalMapper(): WeatherDomainToLocalMapper =
+        WeatherDomainToLocalMapper()
 }

@@ -1,7 +1,7 @@
-package com.gahov.prweather.data.local.source.auth.impl
+package com.gahov.prweather.data.source.auth.impl
 
 import com.gahov.prweather.data.local.entities.TokenData
-import com.gahov.prweather.data.local.source.auth.TokenSource
+import com.gahov.prweather.data.source.auth.TokenSource
 import com.gahov.prweather.data.local.storage.authorization.AuthorizationLocalStorage
 
 class ImplTokenSource(

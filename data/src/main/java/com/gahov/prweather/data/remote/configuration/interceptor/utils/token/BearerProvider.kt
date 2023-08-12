@@ -1,7 +1,7 @@
 package com.gahov.prweather.data.remote.configuration.interceptor.utils.token
 
 import com.gahov.prweather.data.local.entities.TokenData
-import com.gahov.prweather.data.local.source.auth.TokenSource
+import com.gahov.prweather.data.source.auth.TokenSource
 
 class BearerProvider(
     private val tokenSource: TokenSource,

@@ -9,4 +9,6 @@ interface WeatherRepository {
 
     suspend fun loadCityWeatherByName(cityName: String): Either<Failure, WeatherEntity>
 
+    suspend fun saveCityWeatherData(weather: WeatherEntity)
+
 }

@@ -2,7 +2,7 @@ package com.gahov.prweather.arch.di.module
 
 import android.content.SharedPreferences
 import com.gahov.prweather.arch.component.device.AndroidSystemInfo
-import com.gahov.prweather.data.local.source.auth.impl.ImplTokenSource
+import com.gahov.prweather.data.source.auth.impl.ImplTokenSource
 import com.gahov.prweather.data.local.storage.authorization.ImplAuthorizationLocalStorage
 import com.gahov.prweather.data.remote.configuration.NetworkConfiguration
 import com.gahov.prweather.data.remote.configuration.NetworkFactory

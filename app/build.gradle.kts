@@ -71,6 +71,8 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     kapt("com.google.dagger:hilt-android-compiler:2.47")
 
+    implementation("androidx.room:room-ktx:2.5.2")
+
     implementation("androidx.startup:startup-runtime:1.1.1")
 
     implementation("io.coil-kt:coil:2.2.2")
