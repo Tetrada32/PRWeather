@@ -7,6 +7,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="presenter"
+            type="com.gahov.prweather.feature.details.presenter.CityWeatherDetailsPresenter" />
+
+        <variable
             name="model"
             type="com.gahov.prweather.feature.details.entity.WeatherDetailsDataModel" />
     </data>
@@ -32,7 +36,8 @@
             android:scaleType="fitXY"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{() -> presenter.onBackPressed()}" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/weatherDetailsCardView"
@@ -56,21 +61,21 @@
                     android:layout_marginTop="@dimen/grid_25"
                     android:gravity="center"
                     android:textColor="@color/black"
-                    app:setText="@{model.locationName}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:setText="@{model.locationName}"
                     tools:text="London, Uk" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/weatherDetailsIcon"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    app:setImage="@{model.weatherIcon}"
                     app:layout_constraintBottom_toTopOf="@id/WeatherDetailsFieldList"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/weatherDetailsCityName"
+                    app:setImage="@{model.weatherIcon}"
                     tools:src="@drawable/ic_city" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -95,10 +100,10 @@
             android:layout_marginBottom="@dimen/grid_20"
             android:gravity="center"
             android:maxLines="2"
-            app:setText="@{model.weatherDate}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:setText="@{model.weatherDate}"
             tools:text="Weather information for London received on 03.10.2019 - 11:28" />
 
 

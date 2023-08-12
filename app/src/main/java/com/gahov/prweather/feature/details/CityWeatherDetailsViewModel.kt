@@ -1,6 +1,7 @@
 package com.gahov.prweather.feature.details
 
 import com.gahov.prweather.arch.controller.BaseViewModel
+import com.gahov.prweather.arch.router.command.Command
 import com.gahov.prweather.domain.component.logger.Logger
 import com.gahov.prweather.domain.entities.common.Either
 import com.gahov.prweather.domain.entities.failure.Failure
@@ -9,13 +10,14 @@ import com.gahov.prweather.domain.entities.weather.WeatherEntity
 import com.gahov.prweather.domain.usecase.weather.LoadCityWeatherUseCase
 import com.gahov.prweather.feature.details.command.CityWeatherDetailsCommand
 import com.gahov.prweather.feature.details.factory.WeatherEntityToModelBuilder
+import com.gahov.prweather.feature.details.presenter.CityWeatherDetailsPresenter
 import javax.inject.Inject
 
 class CityWeatherDetailsViewModel @Inject constructor(
     private val logger: Logger,
     private val modelBuilder: WeatherEntityToModelBuilder,
     private val loadCityWeatherUseCase: LoadCityWeatherUseCase
-) : BaseViewModel() {
+) : BaseViewModel(), CityWeatherDetailsPresenter {
 
     companion object {
         const val HARDCODED_CITY_NAME = "Vienna"
@@ -46,5 +48,9 @@ class CityWeatherDetailsViewModel @Inject constructor(
 
     private fun onResultFailure(failureResult: Failure) {
         logger.log(message = "Failure: \n $failureResult")
+    }
+
+    override fun onBackPressed() {
+        handleCommand(Command.Root)
     }
 }
