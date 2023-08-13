@@ -50,6 +50,6 @@ class CityWeatherDetailsViewModel @Inject constructor(
     }
 
     override fun onBackPressed() {
-        handleCommand(Command.Root)
+        handleCommand(Command.Back)
     }
 }

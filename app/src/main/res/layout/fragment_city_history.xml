@@ -25,8 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@null"
-        android:fitsSystemWindows="false"
-        android:onClick="@{() -> presenter.onItemClick()}">
+        android:fitsSystemWindows="false">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/historyListAppBarLayout"

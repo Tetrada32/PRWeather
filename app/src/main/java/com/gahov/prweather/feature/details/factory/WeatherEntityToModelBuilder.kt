@@ -27,6 +27,7 @@ class WeatherEntityToModelBuilder @Inject constructor(private val context: Conte
 
     override fun buildWeatherModel(entityItem: WeatherEntity): WeatherDetailsDataModel {
         return WeatherDetailsDataModel(
+            id = entityItem.id,
             locationName = TextProvider.Text("${entityItem.cityName}, ${entityItem.countryName}"),
             weatherIcon = IconProvider.Url(createIconUrl(entityItem.iconId)),
             weatherFields = createWeatherDetailsList(entityItem),

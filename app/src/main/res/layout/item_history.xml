@@ -18,7 +18,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="@dimen/grid_72"
-        android:onClick="@{() -> presenter.onItemClick()}">
+        android:onClick="@{() -> presenter.onItemClick(model)}">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/itemWeatherHistoryIcon"
@@ -56,7 +56,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/itemWeatherHistoryIcon"
-            app:setText="@{model.mainTemperature}"
             tools:text="+28 (c)" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
