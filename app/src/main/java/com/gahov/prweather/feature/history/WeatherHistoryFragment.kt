@@ -55,6 +55,6 @@ class WeatherHistoryFragment :
     private fun displayContent(content: List<WeatherDetailsDataModel>) {
         val cityName = args.cityName
         binding.title = TextProvider.Text(getString(R.string.city_history_title, cityName))
-        weatherHistoryAdapter.items = content
+        weatherHistoryAdapter.items = content.toMutableList()
     }
 }

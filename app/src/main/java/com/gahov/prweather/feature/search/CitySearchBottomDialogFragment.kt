@@ -93,14 +93,20 @@ class CitySearchBottomDialogFragment :
         searchRunnable?.let { handler.postDelayed(it, SEARCHING_DELAY) }
     }
 
+    private fun removeCallbacks() {
+        searchRunnable?.let { handler.removeCallbacks(it) }
+        loadingRunnable?.let { handler.removeCallbacks(it) }
+    }
+
     override fun onPause() {
         super.onPause()
+        removeCallbacks()
         binding.textInput.clearFocus()
         binding.textInput.removeTextChangedListener(this)
     }
 
     companion object {
-        private const val LOADING_DELAY = 500L
-        private const val SEARCHING_DELAY = 500L
+        private const val LOADING_DELAY = 650L
+        private const val SEARCHING_DELAY = 1500L
     }
 }

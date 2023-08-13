@@ -43,7 +43,11 @@ abstract class BaseRecyclerListAdapter<T : Any> :
     }
 
     fun removeAt(index: Int) {
-        items.toMutableList().removeAt(index)
-        notifyItemRemoved(index)
+        if (index in items.indices) {
+            val newItems = items.toMutableList()
+            newItems.removeAt(index)
+            items = newItems
+            notifyItemRangeChanged(index, items.size - index)
+        }
     }
 }

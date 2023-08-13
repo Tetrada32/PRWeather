@@ -38,6 +38,11 @@ class CitySelectorFragment :
         setupSwipeToDeleteItemGesture()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadAllCashedWeatherData()
+    }
+
     override fun handleFeatureCommand(command: Command.FeatureCommand) {
         with(command) {
             if (this is CitySelectorCommand) {

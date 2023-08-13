@@ -18,11 +18,7 @@ class CitySelectorViewModel @Inject constructor(
     private val deleteLocalCityUseCase: DeleteLocalCityUseCase,
 ) : BaseViewModel(), CitySelectorPresenter {
 
-    init {
-        loadAllCashedWeatherData()
-    }
-
-    private fun loadAllCashedWeatherData() {
+    fun loadAllCashedWeatherData() {
         launch(Dispatchers.IO) {
             when (val result = loadLocalWeatherListUseCase.execute()) {
                 is Either.Right -> processResult(result.success)
