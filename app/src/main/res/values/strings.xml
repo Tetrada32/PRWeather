@@ -11,4 +11,5 @@
     <string name="field_search_for_cities">Search for cities</string>
     <string name="temperature_with_celsius">%1$d °C</string>
     <string name="wind_speed">%1$d km/h</string>
+    <string name="default_error_message">Something when wrong. Check your Internet connection</string>
 </resources>

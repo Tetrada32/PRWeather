@@ -2,6 +2,7 @@ package com.gahov.prweather.arch.component.error
 
 import android.content.Context
 import android.widget.Toast
+import com.gahov.prweather.R
 import com.gahov.prweather.domain.component.logger.Level
 import com.gahov.prweather.domain.component.logger.Logger
 import com.gahov.prweather.domain.entities.failure.Failure
@@ -60,7 +61,7 @@ open class DefaultFailureHandler(
         context.let { context ->
             Toast.makeText(
                 context.applicationContext,
-                "Something when wrong. Check your Internet connection",
+                context.getString(R.string.default_error_message),
                 Toast.LENGTH_SHORT
             ).show()
         }
