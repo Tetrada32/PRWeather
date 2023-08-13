@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gahov.prweather.R
 import com.gahov.prweather.arch.router.command.Command
 import com.gahov.prweather.arch.ui.fragment.BaseFragment
+import com.gahov.prweather.arch.ui.view.model.TextProvider
 import com.gahov.prweather.databinding.FragmentCityHistoryBinding
 import com.gahov.prweather.feature.details.entity.WeatherDetailsDataModel
 import com.gahov.prweather.feature.history.adapter.WeatherHistoryAdapter
@@ -52,6 +53,8 @@ class WeatherHistoryFragment :
     }
 
     private fun displayContent(content: List<WeatherDetailsDataModel>) {
+        val cityName = args.cityName
+        binding.title = TextProvider.Text(getString(R.string.city_history_title, cityName))
         weatherHistoryAdapter.items = content
     }
 }
