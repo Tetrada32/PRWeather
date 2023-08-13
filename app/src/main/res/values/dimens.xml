@@ -40,4 +40,5 @@
     <dimen name="grid_24">24dp</dimen>
     <dimen name="grid_3">3dp</dimen>
     <dimen name="grid_137">137dp</dimen>
+    <dimen name="grid_400">400dp</dimen>
 </resources>
