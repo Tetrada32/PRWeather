@@ -8,25 +8,7 @@
         android:layout_height="match_parent"
         tools:context=".feature.main.MainActivity">
 
-        <View
-            android:id="@+id/backgroundImage"
-            android:layout_width="match_parent"
-            android:layout_height="255dp"
-            android:background="@drawable/background_image"
-            android:translationZ="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <View
-            android:id="@+id/backgroundColor"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/bg_gradient"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <include layout="@layout/bg_general" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/mainNavHost"
