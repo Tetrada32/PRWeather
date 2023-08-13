@@ -5,6 +5,7 @@ import com.gahov.prweather.data.mapper.common.ApiMapper
 import com.gahov.prweather.data.remote.entities.weather.WeatherDataResponse
 import com.gahov.prweather.data.remote.entities.weather.WeatherResponse
 import com.gahov.prweather.domain.entities.weather.WeatherEntity
+import java.util.Locale
 
 
 class WeatherResponseToDomainMapper : ApiMapper<WeatherDataResponse, WeatherEntity> {
@@ -13,7 +14,7 @@ class WeatherResponseToDomainMapper : ApiMapper<WeatherDataResponse, WeatherEnti
             id = apiModel.id,
             cityName = apiModel.name,
             countryName = apiModel.sys?.country,
-            weatherDescription = getFirstWeatherItem(apiModel.weather).description,
+            weatherDescription = capitalizeFirstLetter(getFirstWeatherItem(apiModel.weather).description),
             temperatureKelvin = apiModel.main?.temperature,
             humidity = apiModel.main?.humidity,
             windSpeed = apiModel.wind?.speed,
@@ -27,6 +28,15 @@ class WeatherResponseToDomainMapper : ApiMapper<WeatherDataResponse, WeatherEnti
             return weatherList[0]
         } else {
             throw Exception()
+        }
+    }
+
+    private fun capitalizeFirstLetter(input: String?): String {
+        if (input.isNullOrEmpty()) {
+            return input.toString()
+        }
+        return input.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
         }
     }
 }

@@ -51,7 +51,7 @@
             style="@style/TextAppearance.PlanRadarWeather.Subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/grid_25"
+            android:layout_marginHorizontal="25.5dp"
             android:layout_marginBottom="@dimen/grid_17"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
