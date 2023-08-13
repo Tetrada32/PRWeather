@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="presenter"
+            type="com.gahov.prweather.feature.selector.presenter.CitySelectorPresenter" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/baseCitySelectorListContainer"
         android:layout_width="match_parent"
@@ -97,5 +106,23 @@
             tools:itemCount="4"
             tools:listitem="@layout/item_city"
             tools:visibility="visible" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/citiesSelectorAddButton"
+            android:layout_width="137dp"
+            android:layout_height="@dimen/grid_56"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/grid_16"
+            android:fontFamily="@font/lato_regular"
+            android:onClick="@{() -> presenter.onAddCityClick()}"
+            android:text="@string/button_add_city"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:icon="@drawable/baseline_add_24"
+            app:iconTint="@color/white"
+            tools:ignore="RtlCompat" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

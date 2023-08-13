@@ -28,6 +28,7 @@ class CitySelectorViewModel @Inject constructor() : BaseViewModel(), CitySelecto
     }
 
     override fun onAddCityClick() {
+        navigateDirection(CitySelectorFragmentDirections.actionCitySelectorToCitySearch())
     }
 
     override fun onCityItemClick() {

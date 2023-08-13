@@ -11,6 +11,15 @@
         tools:layout="@layout/fragment_city_selector">
 
         <action
+            android:id="@+id/actionCitySelectorToCitySearch"
+            app:destination="@id/fragmentCitySearch"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/fragmentCitySelector" />
+
+        <action
             android:id="@+id/actionCitySelectorToCityHistory"
             app:destination="@id/fragmentCityHistory"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -29,6 +38,11 @@
             app:popUpTo="@id/fragmentCitySelector" />
 
     </fragment>
+
+    <dialog
+        android:id="@+id/fragmentCitySearch"
+        android:name="com.gahov.prweather.feature.search.CitySearchBottomDialogFragment"
+        tools:layout="@layout/fragment_city_search" />
 
     <fragment
         android:id="@+id/fragmentCityHistory"

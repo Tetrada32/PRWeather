@@ -7,6 +7,7 @@ import com.gahov.prweather.arch.di.ViewModelKey
 import com.gahov.prweather.feature.details.CityWeatherDetailsViewModel
 import com.gahov.prweather.feature.history.WeatherHistoryViewModel
 import com.gahov.prweather.feature.main.MainViewModel
+import com.gahov.prweather.feature.search.CitySearchViewModel
 import com.gahov.prweather.feature.selector.CitySelectorViewModel
 import dagger.Binds
 import dagger.Module
@@ -40,5 +41,10 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(WeatherHistoryViewModel::class)
     abstract fun bindWeatherHistoryViewModel(viewModel: WeatherHistoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CitySearchViewModel::class)
+    abstract fun bindCitySearchViewModel(viewModel: CitySearchViewModel): ViewModel
 
 }
