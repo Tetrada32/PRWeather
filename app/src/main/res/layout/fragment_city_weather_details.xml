@@ -33,11 +33,11 @@
             android:layout_height="@dimen/grid_56"
             android:layout_marginStart="@dimen/grid_5"
             android:layout_marginTop="@dimen/grid_5"
+            android:onClick="@{() -> presenter.onBackPressed()}"
             android:scaleType="fitXY"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{() -> presenter.onBackPressed()}" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/weatherDetailsCardView"
@@ -90,6 +90,17 @@
                     tools:listitem="@layout/item_weather_details_data" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <ProgressBar
+            android:id="@+id/weatherDetailsProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationZ="@dimen/grid_2"
+            app:isVisible="@{model.isLoading()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/weatherDetailsDate"
