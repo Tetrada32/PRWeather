@@ -8,7 +8,7 @@ class BearerProvider(
 ) : TokenProvider {
 
     @Synchronized
-    override fun getToken() = tokenSource.getToken().accessToken
+    override fun getToken() = tokenSource.getToken()?.accessToken
 
     @Synchronized
     override fun setToken(tokenData: TokenData) {

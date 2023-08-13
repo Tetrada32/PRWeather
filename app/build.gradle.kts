@@ -47,6 +47,12 @@ android {
     kapt {
         correctErrorTypes = true
     }
+
+    sourceSets {
+        getByName("test") {
+            java.srcDirs("src\\test\\resources") // Add any custom test source directories
+        }
+    }
 }
 
 dependencies {
@@ -72,8 +78,10 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.47")
 
     implementation("androidx.room:room-ktx:2.5.2")
-
     implementation("androidx.startup:startup-runtime:1.1.1")
 
     implementation("io.coil-kt:coil:2.2.2")
+
+    androidTestImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test:runner:1.5.2")
 }

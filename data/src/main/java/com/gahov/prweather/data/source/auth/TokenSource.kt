@@ -5,9 +5,9 @@ import com.gahov.prweather.domain.source.Source
 
 interface TokenSource : Source {
 
-    fun getToken(): TokenData
+    fun getToken(): TokenData?
 
-    fun updateToken(tokenData: TokenData)
+    fun updateToken(tokenData: TokenData?)
 
     suspend fun clearToken()
 

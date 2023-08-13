@@ -7,7 +7,7 @@ class ImplAuthorizationLocalStorage(
     preferences: SharedPreferences,
 ) : AuthorizationLocalStorage, BasePreferences(preferences) {
 
-    override var accessToken: String
+    override var accessToken: String?
         get() = get(KEY_ACCESS_TOKEN, "")
         set(value) = put(KEY_ACCESS_TOKEN, value)
 

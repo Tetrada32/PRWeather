@@ -31,11 +31,16 @@ android {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
+    sourceSets {
+        getByName("test") {
+            java.srcDirs("src\\test\\resources") // Add any custom test source directories
+        }
+    }
+
     namespace = "com.gahov.data"
 }
 
 dependencies {
-
     dependencies {
         implementation(project(":domain"))
 
@@ -49,9 +54,10 @@ dependencies {
 
         implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
 
-        implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7")
+        implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.9")
+        implementation("com.squareup.okhttp3:okhttp:4.10.0")
         implementation("com.squareup.retrofit2:retrofit:2.9.0")
-
+        implementation("com.squareup.retrofit2:converter-gson:2.9.0")
         implementation("com.google.code.gson:gson:2.9.0")
 
         implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
@@ -66,5 +72,15 @@ dependencies {
 
         implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
         implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+
+        androidTestImplementation("junit:junit:4.13.2")
+        androidTestImplementation("androidx.test:runner:1.5.2")
+        testImplementation("junit:junit:4.13.2")
+        testImplementation("com.squareup.okhttp3:mockwebserver3:5.0.0-alpha.9")
+        testImplementation("org.mockito:mockito-core:4.8.1")
+        testImplementation("org.mockito:mockito-inline:4.8.1")
+        testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+        testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+        testImplementation("com.google.truth:truth:1.1.3")
     }
 }

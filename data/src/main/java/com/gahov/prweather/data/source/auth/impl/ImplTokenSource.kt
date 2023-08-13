@@ -8,14 +8,14 @@ class ImplTokenSource(
     private val storage: AuthorizationLocalStorage,
 ) : TokenSource {
 
-    override fun getToken(): TokenData {
+    override fun getToken(): TokenData? {
         return TokenData(
-            accessToken = storage.accessToken
+            accessToken = storage.accessToken.toString()
         )
     }
 
-    override fun updateToken(tokenData: TokenData) {
-        storage.accessToken = tokenData.accessToken
+    override fun updateToken(tokenData: TokenData?) {
+        storage.accessToken = tokenData?.accessToken.toString()
     }
 
     override suspend fun clearToken() {
