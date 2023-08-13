@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="grid_1">1dp</dimen>
     <dimen name="grid_2">2dp</dimen>
     <dimen name="grid_5">5dp</dimen>
     <dimen name="grid_6">6dp</dimen>
@@ -33,4 +34,10 @@
     <dimen name="text_size_h2">20sp</dimen>
     <dimen name="text_size_h3">14sp</dimen>
     <dimen name="text_size_h4">12sp</dimen>
+    <dimen name="grid_255">255dp</dimen>
+    <dimen name="grid_64">64dp</dimen>
+    <dimen name="grid_58">58dp</dimen>
+    <dimen name="grid_24">24dp</dimen>
+    <dimen name="grid_3">3dp</dimen>
+    <dimen name="grid_137">137dp</dimen>
 </resources>

@@ -17,14 +17,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/grid_56">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/itemCityIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_margin="@dimen/grid_25"
+            android:layout_width="@dimen/grid_24"
+            android:layout_height="@dimen/grid_24"
+            android:layout_marginHorizontal="@dimen/grid_16"
             android:onClick="@{() -> presenter.onCityItemClick(city.cityName)}"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +37,7 @@
             style="@style/TextAppearance.PlanRadarWeather.Subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/grid_25"
+            android:layout_marginHorizontal="@dimen/grid_32"
             android:onClick="@{() -> presenter.onCityItemClick(city.cityName)}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -48,9 +49,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/itemCityDetailsIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginHorizontal="@dimen/grid_25"
+            android:layout_width="@dimen/grid_24"
+            android:layout_height="@dimen/grid_24"
+            android:layout_marginHorizontal="@dimen/grid_16"
             android:onClick="@{() -> presenter.onCityHistoryButtonClick(city.cityName)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

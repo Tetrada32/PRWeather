@@ -42,8 +42,8 @@
                 android:animateLayoutChanges="false"
                 app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
                 app:contentScrim="@null"
-                app:expandedTitleMarginEnd="64dp"
-                app:expandedTitleMarginStart="72dp"
+                app:expandedTitleMarginEnd="@dimen/grid_64"
+                app:expandedTitleMarginStart="@dimen/grid_72"
                 app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 tools:visibility="visible">
@@ -94,8 +94,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_regular"
                 android:includeFontPadding="false"
-                android:paddingStart="58dp"
-                android:paddingEnd="58dp"
+                android:paddingStart="@dimen/grid_58"
+                android:paddingEnd="@dimen/grid_58"
                 android:textColor="@color/white"
                 tools:text="London Historical" />
         </com.google.android.material.appbar.MaterialToolbar>
