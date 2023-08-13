@@ -37,6 +37,7 @@ fun ImageView.loadImage(
     error(placeholderParam)
     placeholder(placeholderParam)
 }
+
 internal fun getProgressPlaceholder(context: Context): CircularProgressDrawable {
     val color = ResourcesCompat.getColor(context.resources, R.color.colorPrimary, context.theme)
     return CircularProgressDrawable(context).apply {
