@@ -5,7 +5,6 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.core.view.isVisible
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gahov.prweather.R
 import com.gahov.prweather.arch.router.command.Command
@@ -40,8 +39,6 @@ class CitySelectorFragment :
             if (this is CitySelectorCommand) {
                 when (this) {
                     is CitySelectorCommand.DisplayContent -> displayContent(content)
-                    is CitySelectorCommand.NavigateToDetails -> navigateToDetails()
-                    is CitySelectorCommand.NavigateToHistory -> navigateToHistory()
                 }
             } else {
                 super.handleFeatureCommand(command)
@@ -87,15 +84,5 @@ class CitySelectorFragment :
         }
         binding.citiesSelectorToolbar.animate().translationY(0F).interpolator =
             DecelerateInterpolator(2F)
-    }
-
-    private fun navigateToDetails() {
-        val action = CitySelectorFragmentDirections.actionCitySelectorToCityDetails()
-        findNavController().navigate(action)
-    }
-
-    private fun navigateToHistory() {
-        val action = CitySelectorFragmentDirections.actionCitySelectorToCityHistory()
-        findNavController().navigate(action)
     }
 }

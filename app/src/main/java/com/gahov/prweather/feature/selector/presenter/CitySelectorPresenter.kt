@@ -4,7 +4,7 @@ interface CitySelectorPresenter {
 
     fun onAddCityClick()
 
-    fun onCityItemClick()
+    fun onCityItemClick(cityName: String)
 
-    fun onCityHistoryButtonClick()
+    fun onCityHistoryButtonClick(cityName: String)
 }

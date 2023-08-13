@@ -11,4 +11,6 @@ interface WeatherRepository {
 
     suspend fun saveCityWeatherData(weather: WeatherEntity)
 
+    suspend fun getCitiesWeatherList(): Either<Failure, List<WeatherEntity>>
+
 }

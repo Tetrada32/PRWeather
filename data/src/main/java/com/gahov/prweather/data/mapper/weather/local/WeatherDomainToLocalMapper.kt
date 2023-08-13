@@ -1,14 +1,14 @@
 package com.gahov.prweather.data.mapper.weather.local
 
-import com.gahov.prweather.data.local.entities.CityWeatherDTO
+import com.gahov.prweather.data.local.entities.WeatherDTO
 import com.gahov.prweather.data.mapper.common.DbMapper
 import com.gahov.prweather.domain.entities.weather.WeatherEntity
 
 
-class WeatherDomainToLocalMapper : DbMapper<WeatherEntity, CityWeatherDTO> {
+class WeatherDomainToLocalMapper : DbMapper<WeatherEntity, WeatherDTO> {
 
-    override fun toDatabase(domainModel: WeatherEntity): CityWeatherDTO {
-        return CityWeatherDTO(
+    override fun toDatabase(domainModel: WeatherEntity): WeatherDTO {
+        return WeatherDTO(
             id = domainModel.id,
             cityName = domainModel.cityName,
             countryName = domainModel.countryName,
@@ -21,7 +21,7 @@ class WeatherDomainToLocalMapper : DbMapper<WeatherEntity, CityWeatherDTO> {
         )
     }
 
-    override fun toDomain(dbModel: CityWeatherDTO): WeatherEntity {
+    override fun toDomain(dbModel: WeatherDTO): WeatherEntity {
         return WeatherEntity(
             id = dbModel.id,
             cityName = dbModel.cityName,

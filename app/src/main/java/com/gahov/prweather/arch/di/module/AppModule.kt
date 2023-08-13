@@ -17,7 +17,8 @@ import dagger.hilt.components.SingletonComponent
         LoggerModule::class,
         SharedPreferencesModule::class,
         EntityBuilderModule::class,
-        DatabaseModule::class
+        DatabaseModule::class,
+        UseCaseModule::class
     ]
 )
 @InstallIn(SingletonComponent::class)

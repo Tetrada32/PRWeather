@@ -5,44 +5,39 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.gahov.prweather.R
+import com.gahov.prweather.arch.router.command.Command
+import com.gahov.prweather.arch.ui.dialog.BaseBottomSheetFragment
 import com.gahov.prweather.databinding.FragmentCitySearchBinding
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.gahov.prweather.feature.search.command.CitySearchCommand
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class CitySearchBottomDialogFragment : BottomSheetDialogFragment(), TextWatcher {
+class CitySearchBottomDialogFragment :
+    BaseBottomSheetFragment<CitySearchViewModel, FragmentCitySearchBinding>(
+        layoutId = R.layout.fragment_city_search,
+        viewModelClass = CitySearchViewModel::class.java
+    ), TextWatcher {
 
     private val handler = Handler(Looper.getMainLooper())
     private var runnable: Runnable? = null
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private val viewModel: CitySearchViewModel by viewModels { viewModelFactory }
-
-    private lateinit var binding: FragmentCitySearchBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NO_FRAME, R.style.ThemeOverlay_Material3_BottomSheetDialog)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_city_search, container, false)
-        return binding.root
+    override fun handleFeatureCommand(command: Command.FeatureCommand) {
+        with(command) {
+            if (this is CitySearchCommand) {
+                when (this) {
+                    is CitySearchCommand.OnNetworkError -> displayError(failure)
+                }
+            } else {
+                super.handleFeatureCommand(command)
+            }
+        }
     }
 
     override fun onResume() {
@@ -63,7 +58,7 @@ class CitySearchBottomDialogFragment : BottomSheetDialogFragment(), TextWatcher 
     override fun afterTextChanged(s: Editable?) {
         runnable = Runnable {
             val inputText = s.toString()
-            viewModel.saveNewCityName(inputText)
+            viewModel.onNewCityName(inputText)
         }
         runnable?.let { handler.postDelayed(it, 1600) }
     }

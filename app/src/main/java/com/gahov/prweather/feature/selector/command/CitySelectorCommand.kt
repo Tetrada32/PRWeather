@@ -8,7 +8,4 @@ sealed class CitySelectorCommand : Command.FeatureCommand() {
 
     data class DisplayContent(var content: List<CityModel>) : CitySelectorCommand()
 
-    data class NavigateToDetails(var content: List<CityModel>) : CitySelectorCommand()
-
-    data class NavigateToHistory(var content: List<CityModel>) : CitySelectorCommand()
 }

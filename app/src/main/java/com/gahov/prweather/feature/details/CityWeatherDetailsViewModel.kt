@@ -2,34 +2,37 @@ package com.gahov.prweather.feature.details
 
 import com.gahov.prweather.arch.controller.BaseViewModel
 import com.gahov.prweather.arch.router.command.Command
-import com.gahov.prweather.domain.component.logger.Logger
 import com.gahov.prweather.domain.entities.common.Either
 import com.gahov.prweather.domain.entities.failure.Failure
 import com.gahov.prweather.domain.entities.weather.CityWeatherParams
 import com.gahov.prweather.domain.entities.weather.WeatherEntity
-import com.gahov.prweather.domain.usecase.weather.LoadCityWeatherUseCase
+import com.gahov.prweather.domain.usecase.weather.LoadRemoteCityWeatherUseCase
 import com.gahov.prweather.feature.details.command.CityWeatherDetailsCommand
 import com.gahov.prweather.feature.details.factory.WeatherEntityToModelBuilder
 import com.gahov.prweather.feature.details.presenter.CityWeatherDetailsPresenter
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 class CityWeatherDetailsViewModel @Inject constructor(
-    private val logger: Logger,
     private val modelBuilder: WeatherEntityToModelBuilder,
-    private val loadCityWeatherUseCase: LoadCityWeatherUseCase
+    private val loadCityWeatherUseCase: LoadRemoteCityWeatherUseCase
 ) : BaseViewModel(), CityWeatherDetailsPresenter {
 
-    companion object {
-        const val HARDCODED_CITY_NAME = "Vienna"
+    fun loadContent(args: CityWeatherDetailsFragmentArgs) {
+        val cityData = args.cityWeatherData
+        val cityName = args.cityName
+
+        if (cityData == null) {
+            loadWeatherContentByCityName(cityName ?: return)
+        } else {
+            onResultSuccess(cityData)
+        }
     }
 
-    private fun getHardcodedParam(): CityWeatherParams {
-        return CityWeatherParams(HARDCODED_CITY_NAME)
-    }
-
-    fun loadWeatherContent() {
-        launch {
-            when (val result = loadCityWeatherUseCase.execute(param = getHardcodedParam())) {
+    private fun loadWeatherContentByCityName(cityName: String) {
+        launch(Dispatchers.IO) {
+            when (val result =
+                loadCityWeatherUseCase.execute(param = CityWeatherParams(cityName))) {
                 is Either.Right -> onResultSuccess(result = result.success)
                 is Either.Left -> onResultFailure(result.failure)
             }
@@ -38,16 +41,12 @@ class CityWeatherDetailsViewModel @Inject constructor(
 
     private fun onResultSuccess(result: WeatherEntity) {
         handleCommand(
-            CityWeatherDetailsCommand.DisplayContent(
-                content =
-                modelBuilder.buildWeatherModel(result)
-            )
+            CityWeatherDetailsCommand.DisplayContent(modelBuilder.buildWeatherModel(result))
         )
-        logger.log(message = "Success: \n $result")
     }
 
     private fun onResultFailure(failureResult: Failure) {
-        logger.log(message = "Failure: \n $failureResult")
+        handleCommand(CityWeatherDetailsCommand.OnNetworkError(failureResult))
     }
 
     override fun onBackPressed() {

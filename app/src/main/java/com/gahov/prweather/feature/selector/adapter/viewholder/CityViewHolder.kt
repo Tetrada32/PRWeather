@@ -11,7 +11,7 @@ class CityViewHolder(
 ) : BaseViewHolder<CityModel, ItemCityBinding>(binding) {
 
     override fun bindView(position: Int) {
-        val city = item as CityModel.CityItem
+        val city = item
 
         binding.presenter = presenter
         binding.city = city

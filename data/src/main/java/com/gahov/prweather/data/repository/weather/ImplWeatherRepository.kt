@@ -38,4 +38,14 @@ class ImplWeatherRepository constructor(
             localSource.saveWeather(mappedItem)
         }
     }
+
+    override suspend fun getCitiesWeatherList(): Either<Failure, List<WeatherEntity>> {
+        return try {
+            val cashedCitiesWeatherList = localSource.getAllWeatherData()
+            Either.Right(cashedCitiesWeatherList.map { weatherLocalMapper.toDomain(it) })
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Either.Left(Failure.Common(e.fillInStackTrace()))
+        }
+    }
 }

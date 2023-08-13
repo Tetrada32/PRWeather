@@ -41,6 +41,11 @@ class WeatherHistoryViewModel @Inject constructor(
     }
 
     override fun onItemClick() {
-        navigateDirection(WeatherHistoryFragmentDirections.actionCityHistoryToCityDetails())
+        navigateDirection(
+            WeatherHistoryFragmentDirections.actionCityHistoryToCityDetails(
+                null,
+                null
+            )
+        )
     }
 }

@@ -1,9 +1,10 @@
 package com.gahov.prweather.data.source.weather.local
 
-import com.gahov.prweather.data.local.entities.CityWeatherDTO
+import com.gahov.prweather.data.local.entities.WeatherDTO
 
 interface WeatherLocalSource {
 
-    suspend fun saveWeather(weatherData: CityWeatherDTO)
+    suspend fun saveWeather(weatherData: WeatherDTO)
 
+    suspend fun getAllWeatherData(): List<WeatherDTO>
 }

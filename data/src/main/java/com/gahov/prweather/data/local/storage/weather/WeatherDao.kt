@@ -4,18 +4,18 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.gahov.prweather.data.local.entities.CityWeatherDTO
+import com.gahov.prweather.data.local.entities.WeatherDTO
 
 @Dao
 interface WeatherDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertItems(cityWeatherList: List<CityWeatherDTO>)
+    fun insertItems(cityWeatherList: List<WeatherDTO>)
 
-    @Query("SELECT * FROM cityWeather")
-    fun select() : List<CityWeatherDTO>
+    @Query("SELECT * FROM weatherData")
+    fun select() : List<WeatherDTO>
 
-    @Query("DELETE FROM cityWeather")
+    @Query("DELETE FROM weatherData")
     fun deleteAll()
 
 }

@@ -42,7 +42,18 @@
     <dialog
         android:id="@+id/fragmentCitySearch"
         android:name="com.gahov.prweather.feature.search.CitySearchBottomDialogFragment"
-        tools:layout="@layout/fragment_city_search" />
+        tools:layout="@layout/fragment_city_search">
+
+        <action
+            android:id="@+id/actionCitySearchToCityDetails"
+            app:destination="@id/fragmentCityWeatherDetails"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/fragmentCitySelector" />
+
+    </dialog>
 
     <fragment
         android:id="@+id/fragmentCityHistory"
@@ -63,6 +74,18 @@
     <fragment
         android:id="@+id/fragmentCityWeatherDetails"
         android:name="com.gahov.prweather.feature.details.CityWeatherDetailsFragment"
-        tools:layout="@layout/fragment_city_weather_details" />
+        tools:layout="@layout/fragment_city_weather_details">
+
+        <argument
+            android:name="cityWeatherData"
+            app:argType="com.gahov.prweather.domain.entities.weather.WeatherEntity"
+            app:nullable="true" />
+
+        <argument
+            android:name="cityName"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

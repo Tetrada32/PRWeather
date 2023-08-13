@@ -13,7 +13,9 @@ import com.gahov.prweather.arch.router.command.Command
 import com.gahov.prweather.arch.router.command.NavDirection
 import com.gahov.prweather.arch.ui.view.model.TextProvider
 import com.gahov.prweather.domain.entities.failure.Failure
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 abstract class BaseViewModel : ViewModel(), Controller, CoroutineProvider {
 
@@ -48,7 +50,10 @@ abstract class BaseViewModel : ViewModel(), Controller, CoroutineProvider {
         _command.postValue(command)
     }
 
-    fun launch(block: suspend CoroutineScope.() -> Unit) = launcher.launch(block = block)
+    fun launch(
+        dispatcher: CoroutineDispatcher = Dispatchers.Default,
+        block: suspend CoroutineScope.() -> Unit
+    ) = launcher.launch(block = block, dispatcher = dispatcher)
 
     override fun showMessage(message: TextProvider) {
         _message.value = message

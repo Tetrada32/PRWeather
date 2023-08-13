@@ -2,6 +2,7 @@ package com.gahov.prweather.feature.details
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gahov.prweather.R
 import com.gahov.prweather.arch.router.command.Command
@@ -19,6 +20,8 @@ class CityWeatherDetailsFragment :
         viewModelClass = CityWeatherDetailsViewModel::class.java
     ) {
 
+    private val args: CityWeatherDetailsFragmentArgs by navArgs()
+
     private val weatherDetailsFieldsAdapter: WeatherDetailsFieldsAdapter by lazy {
         WeatherDetailsFieldsAdapter()
     }
@@ -27,7 +30,7 @@ class CityWeatherDetailsFragment :
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
         binding.presenter = viewModel
-        viewModel.loadWeatherContent()
+        viewModel.loadContent(args)
     }
 
     override fun handleFeatureCommand(command: Command.FeatureCommand) {

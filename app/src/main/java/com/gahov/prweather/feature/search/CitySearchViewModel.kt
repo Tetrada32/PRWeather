@@ -1,18 +1,47 @@
 package com.gahov.prweather.feature.search
 
 import com.gahov.prweather.arch.controller.BaseViewModel
-import com.gahov.prweather.domain.component.logger.Level
 import com.gahov.prweather.domain.component.logger.Logger
+import com.gahov.prweather.domain.entities.common.Either
+import com.gahov.prweather.domain.entities.failure.Failure
+import com.gahov.prweather.domain.entities.weather.CityWeatherParams
+import com.gahov.prweather.domain.entities.weather.WeatherEntity
+import com.gahov.prweather.domain.usecase.weather.LoadRemoteCityWeatherUseCase
+import com.gahov.prweather.feature.search.command.CitySearchCommand
 import javax.inject.Inject
 
 class CitySearchViewModel @Inject constructor(
-    private val logger: Logger
+    private val logger: Logger,
+    private val loadCityWeatherUseCase: LoadRemoteCityWeatherUseCase
 ) : BaseViewModel() {
 
-    fun saveNewCityName(cityName: String) {
+    fun onNewCityName(cityName: String) {
         if ((cityName.chars()).count() >= MINIMUM_CITY_NAME_LENGTH) {
-            logger.log(Level.Info, "Input text: $cityName")
+            searchCityByInputName(CityWeatherParams(cityName))
         }
+    }
+
+    private fun searchCityByInputName(param: CityWeatherParams) {
+        launch {
+            when (val result = loadCityWeatherUseCase.execute(param = param)) {
+                is Either.Right -> onResultSuccess(result = result.success)
+                is Either.Left -> onResultFailure(result.failure)
+            }
+        }
+    }
+
+    private fun onResultSuccess(result: WeatherEntity) {
+        navigateDirection(
+            CitySearchBottomDialogFragmentDirections.actionCitySearchToCityDetails(
+                cityWeatherData = result,
+                cityName = result.cityName
+            )
+        )
+    }
+
+    private fun onResultFailure(failureResult: Failure) {
+        handleCommand(CitySearchCommand.OnNetworkError(failureResult))
+        logger.log(message = "Failure: \n $failureResult")
     }
 
     companion object {

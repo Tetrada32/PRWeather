@@ -1,5 +1,8 @@
 package com.gahov.prweather.domain.entities.weather
 
+import android.os.Parcelable
+
+@kotlinx.parcelize.Parcelize
 data class WeatherEntity(
     val id: Int? = null,
     val cityName: String? = null,
@@ -10,4 +13,4 @@ data class WeatherEntity(
     val windSpeed: Double? = null,
     val iconId: String? = null,
     val time: String? = null
-)
+) : Parcelable
