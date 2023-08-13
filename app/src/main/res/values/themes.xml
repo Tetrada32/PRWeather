@@ -11,6 +11,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/colorSecondary</item>
         <item name="android:windowLightStatusBar">true</item>
-        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">#00000000</item>
     </style>
 </resources>
