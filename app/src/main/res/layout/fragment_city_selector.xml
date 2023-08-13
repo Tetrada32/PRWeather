@@ -92,17 +92,18 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/citiesSelectorList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/grid_10"
             android:background="@null"
             android:clipToPadding="false"
             android:contentDescription="@null"
             android:fadeScrollbars="true"
             android:importantForAccessibility="noHideDescendants"
+            android:overScrollMode="never"
             android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:spanCount="2"
-            tools:itemCount="4"
+            tools:itemCount="20"
             tools:listitem="@layout/item_city"
             tools:visibility="visible" />
 
