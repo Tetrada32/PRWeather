@@ -17,13 +17,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/grid_56">
+        android:layout_height="@dimen/grid_66">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/itemCityIcon"
-            android:layout_width="@dimen/grid_24"
-            android:layout_height="@dimen/grid_24"
-            android:layout_marginHorizontal="@dimen/grid_16"
+            android:layout_width="@dimen/grid_28"
+            android:layout_height="@dimen/grid_28"
+            android:layout_marginHorizontal="@dimen/grid_19"
             android:onClick="@{() -> presenter.onCityItemClick(city.cityName)}"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +37,7 @@
             style="@style/TextAppearance.PlanRadarWeather.Subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/grid_32"
+            android:layout_marginHorizontal="@dimen/grid_37"
             android:onClick="@{() -> presenter.onCityItemClick(city.cityName)}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -49,9 +49,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/itemCityDetailsIcon"
-            android:layout_width="@dimen/grid_24"
-            android:layout_height="@dimen/grid_24"
-            android:layout_marginHorizontal="@dimen/grid_16"
+            android:layout_width="@dimen/grid_28"
+            android:layout_height="@dimen/grid_28"
+            android:layout_marginHorizontal="@dimen/grid_19"
             android:onClick="@{() -> presenter.onCityHistoryButtonClick(city.cityName)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

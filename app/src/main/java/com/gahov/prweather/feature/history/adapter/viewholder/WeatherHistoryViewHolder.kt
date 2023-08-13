@@ -23,6 +23,6 @@ class WeatherHistoryViewHolder(
     private fun createWeatherDescription(item: WeatherDetailsDataModel): String {
         val description = ((item.weatherFields?.get(0)?.value) as TextProvider.Text).text
         val temp = (item.mainTemperature as TextProvider.Text).text
-        return "$description, $temp"
+        return "$description,  $temp"
     }
 }

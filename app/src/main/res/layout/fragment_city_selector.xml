@@ -21,7 +21,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/citySelectorAppBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/grid_130"
+            android:layout_height="@dimen/grid_161"
             android:background="@color/colorPrimary"
             android:fitsSystemWindows="false"
             android:translationZ="@dimen/grid_1"
@@ -34,8 +34,8 @@
                 android:animateLayoutChanges="false"
                 app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
                 app:contentScrim="@null"
-                app:expandedTitleMarginEnd="64dp"
-                app:expandedTitleMarginStart="72dp"
+                app:expandedTitleMarginEnd="@dimen/grid_64"
+                app:expandedTitleMarginStart="@dimen/grid_72"
                 app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 tools:visibility="visible">
@@ -53,10 +53,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/grid_77"
-                        android:layout_marginBottom="@dimen/grid_25"
+                        android:layout_marginTop="@dimen/grid_91"
+                        android:layout_marginBottom="@dimen/grid_26"
                         android:ellipsize="end"
-                        android:paddingStart="@dimen/grid_72"
+                        android:paddingStart="@dimen/grid_84"
                         android:paddingEnd="0dp"
                         android:text="@string/citiesSelectorScreenTitle"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,12 +81,13 @@
             tools:visibility="visible">
 
             <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextAppearance.PlanRadarWeather.Text.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_regular"
                 android:includeFontPadding="false"
-                android:paddingStart="58dp"
-                android:paddingEnd="58dp"
+                android:paddingStart="69dp"
+                android:paddingEnd="69dp"
                 android:text="@string/citiesSelectorScreenTitle"
                 android:textColor="@color/white" />
 
@@ -112,10 +113,10 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/citiesSelectorAddButton"
-            android:layout_width="@dimen/grid_137"
-            android:layout_height="@dimen/grid_56"
+            android:layout_width="@dimen/grid_150"
+            android:layout_height="@dimen/grid_61"
             android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/grid_16"
+            android:layout_margin="@dimen/grid_19"
             android:fontFamily="@font/lato_regular"
             android:onClick="@{() -> presenter.onAddCityClick()}"
             android:text="@string/button_add_city"
@@ -126,6 +127,7 @@
             android:textStyle="bold"
             android:translationZ="@dimen/grid_3"
             app:icon="@drawable/baseline_add_24"
+            app:iconSize="@dimen/grid_29"
             app:iconTint="@color/white"
             tools:ignore="RtlCompat" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
