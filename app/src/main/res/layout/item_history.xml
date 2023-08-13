@@ -17,7 +17,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/grid_85"
+        android:layout_height="@dimen/grid_82"
         android:onClick="@{() -> presenter.onItemClick(model)}">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -25,7 +25,7 @@
             android:layout_width="@dimen/grid_35"
             android:layout_height="@dimen/grid_35"
             android:layout_marginHorizontal="@dimen/grid_28"
-            android:layout_marginTop="@dimen/grid_5"
+            android:layout_marginTop="@dimen/grid_10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

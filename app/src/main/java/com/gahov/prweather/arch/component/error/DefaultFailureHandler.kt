@@ -1,10 +1,14 @@
 package com.gahov.prweather.arch.component.error
 
+import android.content.Context
+import android.widget.Toast
 import com.gahov.prweather.domain.component.logger.Level
 import com.gahov.prweather.domain.component.logger.Logger
 import com.gahov.prweather.domain.entities.failure.Failure
+import com.gahov.prweather.domain.entities.failure.ServerError
 
 open class DefaultFailureHandler(
+    private val context: Context,
     private val logger: Logger
 ) : ErrorHandler {
 
@@ -31,9 +35,38 @@ open class DefaultFailureHandler(
     }
 
     protected open fun featureFailure(failure: Failure.FeatureFailure) {
+        when (failure) {
+            is ServerError.ServerCodeError -> handleServerCodeError(failure.error.message)
+            else -> handleNonServerCodeError()
+        }
+    }
+
+    private fun handleServerCodeError(error: String) {
+        context.let { context ->
+            Toast.makeText(
+                context.applicationContext,
+                error,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
         logger.log(
-            level = Level.Warning,
-            message = "method featureFailure isn't implement for $failure"
+            level = Level.Error,
+            message = "An server error occurred: $error"
+        )
+    }
+
+    private fun handleNonServerCodeError() {
+        context.let { context ->
+            Toast.makeText(
+                context.applicationContext,
+                "Something when wrong. Check your Internet connection",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        logger.log(
+            level = Level.Error,
+            message = "An unknown error occurred"
         )
     }
 

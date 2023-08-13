@@ -75,7 +75,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintWidth_default="wrap"
                         app:setText="@{title}"
-                        tools:text="London Historical" />
+                        tools:text="London historical" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>

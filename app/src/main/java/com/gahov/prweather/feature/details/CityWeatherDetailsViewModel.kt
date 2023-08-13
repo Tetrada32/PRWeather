@@ -57,7 +57,7 @@ class CityWeatherDetailsViewModel @Inject constructor(
     private fun onResultFailure(failureResult: Failure) {
         model = WeatherDetailsDataModel()
         submitList(false)
-        handleCommand(CityWeatherDetailsCommand.OnNetworkError(failureResult))
+        handleFailure(failureResult)
     }
 
     override fun onBackPressed() {

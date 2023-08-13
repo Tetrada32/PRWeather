@@ -11,7 +11,6 @@ import com.gahov.prweather.feature.search.command.CitySearchCommand
 import javax.inject.Inject
 
 class CitySearchViewModel @Inject constructor(
-    private val logger: Logger,
     private val loadCityWeatherUseCase: LoadRemoteCityWeatherUseCase
 ) : BaseViewModel() {
 
@@ -41,7 +40,7 @@ class CitySearchViewModel @Inject constructor(
 
     private fun onResultFailure(failureResult: Failure) {
         handleCommand(CitySearchCommand.OnNetworkError(failureResult))
-        logger.log(message = "Failure: \n $failureResult")
+        handleFailure(failureResult)
     }
 
     companion object {

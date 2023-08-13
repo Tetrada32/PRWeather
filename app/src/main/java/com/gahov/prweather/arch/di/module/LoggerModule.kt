@@ -1,5 +1,6 @@
 package com.gahov.prweather.arch.di.module
 
+import android.content.Context
 import com.gahov.prweather.arch.component.error.DefaultFailureHandler
 import com.gahov.prweather.arch.component.error.ErrorHandler
 import com.gahov.prweather.arch.component.logger.AndroidLogger
@@ -22,7 +23,7 @@ class LoggerModule {
 
     @Provides
     @Singleton
-    internal fun provideErrorHandler(logger: Logger): ErrorHandler {
-        return DefaultFailureHandler(logger = logger)
+    internal fun provideErrorHandler(context: Context, logger: Logger): ErrorHandler {
+        return DefaultFailureHandler(context = context, logger = logger)
     }
 }

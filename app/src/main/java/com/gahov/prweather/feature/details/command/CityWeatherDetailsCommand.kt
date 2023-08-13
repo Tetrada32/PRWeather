@@ -9,5 +9,5 @@ sealed class CityWeatherDetailsCommand : Command.FeatureCommand() {
 
     data class DisplayContent(var content: WeatherDetailsDataModel) : CityWeatherDetailsCommand()
 
-    data class OnNetworkError(var failure: Failure) : CityWeatherDetailsCommand()
+    data class OnError(var failure: Failure) : CityWeatherDetailsCommand()
 }

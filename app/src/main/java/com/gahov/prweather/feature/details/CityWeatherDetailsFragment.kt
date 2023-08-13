@@ -38,7 +38,7 @@ class CityWeatherDetailsFragment :
             if (this is CityWeatherDetailsCommand) {
                 when (this) {
                     is CityWeatherDetailsCommand.DisplayContent -> displayContent(content)
-                    is CityWeatherDetailsCommand.OnNetworkError -> displayError(failure)
+                    is CityWeatherDetailsCommand.OnError -> displayError(failure)
                 }
             } else {
                 super.handleFeatureCommand(command)

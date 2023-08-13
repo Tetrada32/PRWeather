@@ -49,7 +49,7 @@ class CitySearchBottomDialogFragment :
         with(command) {
             if (this is CitySearchCommand) {
                 when (this) {
-                    is CitySearchCommand.OnNetworkError -> displayError(failure)
+                    is CitySearchCommand.OnNetworkError -> removeCallbacks()
                 }
             } else {
                 super.handleFeatureCommand(command)
@@ -75,8 +75,10 @@ class CitySearchBottomDialogFragment :
     }
 
     override fun afterTextChanged(s: Editable?) {
-        startLoadingAnimation()
-        startSearching(s.toString())
+        if (!s.isNullOrEmpty()) {
+            startLoadingAnimation()
+            startSearching(s.toString())
+        }
     }
 
     private fun startLoadingAnimation() {
@@ -94,6 +96,7 @@ class CitySearchBottomDialogFragment :
     }
 
     private fun removeCallbacks() {
+        onLoading(false)
         searchRunnable?.let { handler.removeCallbacks(it) }
         loadingRunnable?.let { handler.removeCallbacks(it) }
     }

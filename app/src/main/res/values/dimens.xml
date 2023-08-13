@@ -59,4 +59,5 @@
     <dimen name="grid_85">85dp</dimen>
     <dimen name="grid_17">17dp</dimen>
     <dimen name="grid_7">7dp</dimen>
+    <dimen name="grid_82">82dp</dimen>
 </resources>

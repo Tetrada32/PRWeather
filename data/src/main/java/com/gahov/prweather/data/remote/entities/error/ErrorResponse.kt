@@ -1,11 +1,13 @@
 package com.gahov.prweather.data.remote.entities.error
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ErrorResponse(
-    @SerializedName("cod")
+    @SerialName("cod")
     val responseCode: Int? = null,
 
-    @SerializedName("message")
+    @SerialName("message")
     val errorMessage: String? = null
 )
