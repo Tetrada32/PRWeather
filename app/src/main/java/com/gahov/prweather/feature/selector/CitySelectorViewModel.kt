@@ -42,7 +42,7 @@ class CitySelectorViewModel @Inject constructor(
         navigateDirection(
             CitySelectorFragmentDirections.actionCitySelectorToCityDetails(
                 cityWeatherData = null,
-                cityName = null
+                cityName = cityName
             )
         )
     }

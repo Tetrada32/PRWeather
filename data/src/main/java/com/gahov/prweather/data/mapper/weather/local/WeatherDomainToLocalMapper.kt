@@ -9,7 +9,7 @@ class WeatherDomainToLocalMapper : DbMapper<WeatherEntity, WeatherDTO> {
 
     override fun toDatabase(domainModel: WeatherEntity): WeatherDTO {
         return WeatherDTO(
-            id = domainModel.id,
+            id = domainModel.id?.toLong(),
             cityName = domainModel.cityName,
             countryName = domainModel.countryName,
             weatherDescription = domainModel.weatherDescription,
@@ -23,7 +23,7 @@ class WeatherDomainToLocalMapper : DbMapper<WeatherEntity, WeatherDTO> {
 
     override fun toDomain(dbModel: WeatherDTO): WeatherEntity {
         return WeatherEntity(
-            id = dbModel.id,
+            id = dbModel.id?.toInt(),
             cityName = dbModel.cityName,
             countryName = dbModel.countryName,
             weatherDescription = dbModel.weatherDescription,
