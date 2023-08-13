@@ -6,5 +6,5 @@ interface WeatherLocalSource {
 
     suspend fun saveWeather(weatherData: WeatherDTO)
 
-    suspend fun getAllWeatherData(): List<WeatherDTO>
+    suspend fun getAllWeatherData(cityName: String): List<WeatherDTO>
 }

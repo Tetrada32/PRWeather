@@ -15,6 +15,9 @@ interface WeatherDao {
     @Query("SELECT * FROM weatherData")
     fun select() : List<WeatherDTO>
 
+    @Query("SELECT * FROM weatherData WHERE cityName = :cityName")
+    fun getWeatherDataByCityName(cityName: String): List<WeatherDTO>
+
     @Query("DELETE FROM weatherData")
     fun deleteAll()
 

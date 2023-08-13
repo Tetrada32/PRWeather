@@ -2,6 +2,7 @@ package com.gahov.prweather.feature.history
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gahov.prweather.R
 import com.gahov.prweather.arch.router.command.Command
@@ -19,13 +20,15 @@ class WeatherHistoryFragment :
         viewModelClass = WeatherHistoryViewModel::class.java
     ) {
 
+    private val args: WeatherHistoryFragmentArgs by navArgs()
+
     private val weatherHistoryAdapter: WeatherHistoryAdapter by lazy {
         WeatherHistoryAdapter(presenter = viewModel)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mockContent()
+        viewModel.loadLocalWeatherHistory(args.cityName)
         binding.presenter = viewModel
         setupAdapter()
     }
@@ -35,6 +38,7 @@ class WeatherHistoryFragment :
             if (this is WeatherHistoryCommand) {
                 when (this) {
                     is WeatherHistoryCommand.DisplayContent -> displayContent(content)
+                    is WeatherHistoryCommand.OnError -> error(failure)
                 }
             } else {
                 super.handleFeatureCommand(command)

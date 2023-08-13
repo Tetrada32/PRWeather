@@ -7,10 +7,10 @@ import com.gahov.prweather.domain.entities.weather.WeatherEntity
 
 interface WeatherRepository {
 
-    suspend fun loadCityWeatherByName(cityName: String): Either<Failure, WeatherEntity>
+    suspend fun loadRemoteCityWeatherByName(cityName: String): Either<Failure, WeatherEntity>
 
     suspend fun saveCityWeatherData(weather: WeatherEntity)
 
-    suspend fun getCitiesWeatherList(): Either<Failure, List<WeatherEntity>>
+    suspend fun getCitiesWeatherList(cityName: String = ""): Either<Failure, List<WeatherEntity>>
 
 }

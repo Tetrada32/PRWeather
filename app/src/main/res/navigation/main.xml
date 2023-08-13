@@ -60,6 +60,12 @@
         android:name="com.gahov.prweather.feature.history.WeatherHistoryFragment"
         tools:layout="@layout/fragment_city_history">
 
+        <argument
+            android:name="cityName"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="false" />
+
         <action
             android:id="@+id/actionCityHistoryToCityDetails"
             app:destination="@id/fragmentCityWeatherDetails"

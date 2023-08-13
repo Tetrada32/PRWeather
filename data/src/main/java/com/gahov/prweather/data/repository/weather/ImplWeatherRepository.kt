@@ -19,7 +19,7 @@ class ImplWeatherRepository constructor(
     private val weatherLocalMapper: WeatherDomainToLocalMapper
 ) : WeatherRepository {
 
-    override suspend fun loadCityWeatherByName(cityName: String): Either<Failure, WeatherEntity> {
+    override suspend fun loadRemoteCityWeatherByName(cityName: String): Either<Failure, WeatherEntity> {
         return when (val result = remoteSource.loadCityWeatherByName(cityName)) {
             is Either.Left -> result
             is Either.Right -> Either.Right(processAndSaveSuccessResult(result.success))
@@ -39,9 +39,9 @@ class ImplWeatherRepository constructor(
         }
     }
 
-    override suspend fun getCitiesWeatherList(): Either<Failure, List<WeatherEntity>> {
+    override suspend fun getCitiesWeatherList(cityName: String): Either<Failure, List<WeatherEntity>> {
         return try {
-            val cashedCitiesWeatherList = localSource.getAllWeatherData()
+            val cashedCitiesWeatherList = localSource.getAllWeatherData(cityName)
             Either.Right(cashedCitiesWeatherList.map { weatherLocalMapper.toDomain(it) })
         } catch (e: Exception) {
             e.printStackTrace()

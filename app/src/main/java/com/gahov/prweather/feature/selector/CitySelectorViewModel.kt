@@ -48,6 +48,10 @@ class CitySelectorViewModel @Inject constructor(
     }
 
     override fun onCityHistoryButtonClick(cityName: String) {
-        navigateDirection(CitySelectorFragmentDirections.actionCitySelectorToCityHistory())
+        navigateDirection(
+            CitySelectorFragmentDirections.actionCitySelectorToCityHistory(
+                cityName
+            )
+        )
     }
 }

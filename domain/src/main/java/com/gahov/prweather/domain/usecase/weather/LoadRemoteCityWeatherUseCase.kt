@@ -14,6 +14,6 @@ class LoadRemoteCityWeatherUseCase(
 
     override suspend fun execute(param: UseCase.Params?): Either<Failure, WeatherEntity> {
         val params = param as? CityWeatherParams
-        return repository.loadCityWeatherByName(params?.cityName.toString())
+        return repository.loadRemoteCityWeatherByName(params?.cityName.toString())
     }
 }

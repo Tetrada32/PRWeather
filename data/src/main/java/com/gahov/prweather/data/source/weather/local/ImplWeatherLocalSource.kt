@@ -12,7 +12,11 @@ class ImplWeatherLocalSource(
         weatherDao.insertItems(listOf(weatherData))
     }
 
-    override suspend fun getAllWeatherData(): List<WeatherDTO> {
-        return weatherDao.select()
+    override suspend fun getAllWeatherData(cityName: String): List<WeatherDTO> {
+        return if (cityName.isNotBlank()) {
+            weatherDao.getWeatherDataByCityName(cityName)
+        } else {
+            return weatherDao.select()
+        }
     }
 }
