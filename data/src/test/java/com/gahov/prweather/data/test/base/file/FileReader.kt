@@ -23,7 +23,7 @@ class FileReader {
 
     companion object {
         const val ERROR_UNAUTHORIZED_401_MOCK = "error/error_unauthorized_401.json"
-        const val ERROR_401_MOCK = "error/error_city_not_found_404.json"
+        const val ERROR_CITY_NOT_FOUND_404_MOCK = "error/error_city_not_found_404.json"
         const val SUCCESS_200_MOCK = "weather/weather_200.json"
     }
 }

@@ -20,9 +20,12 @@ import com.gahov.prweather.data.source.weather.local.WeatherLocalSource
 import com.gahov.prweather.data.source.weather.remote.ImplWeatherRemoteSource
 import com.gahov.prweather.data.source.weather.remote.WeatherRemoteSource
 import com.gahov.prweather.data.test.base.BaseTest
+import com.gahov.prweather.data.test.base.file.FileReader.Companion.ERROR_CITY_NOT_FOUND_404_MOCK
+import com.gahov.prweather.data.test.base.file.FileReader.Companion.ERROR_UNAUTHORIZED_401_MOCK
 import com.gahov.prweather.data.test.base.file.FileReader.Companion.SUCCESS_200_MOCK
 import com.gahov.prweather.data.test.base.retrofit.RetrofitHelper
 import com.gahov.prweather.domain.entities.common.Either
+import com.gahov.prweather.domain.entities.failure.ServerError
 import com.gahov.prweather.domain.repository.weather.WeatherRepository
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -32,6 +35,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Spy
 import org.mockito.kotlin.whenever
+import java.net.HttpURLConnection
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class WeatherRepositoryTest : BaseTest() {
@@ -44,11 +48,11 @@ class WeatherRepositoryTest : BaseTest() {
 
     private lateinit var remoteSource: WeatherRemoteSource
 
-    private lateinit var localSource: WeatherLocalSource
-
     private lateinit var tokenProvider: TokenProvider
 
     private lateinit var tokenSource: TokenSource
+
+    private lateinit var localSource: WeatherLocalSource
 
     @Mock
     private lateinit var weatherDao: WeatherDao
@@ -88,15 +92,63 @@ class WeatherRepositoryTest : BaseTest() {
     }
 
     @Test
-    fun `for success city weather fetch`() = runTest {
+    fun `for success city weather load local`() = runTest {
         whenever(weatherDao.select()).thenReturn(listOf<WeatherDTO>())
-
-        enqueueData(generateSuccessResponse(fileReader.loadJsonAsString(SUCCESS_200_MOCK)))
 
         val actualResult = repository.getCitiesWeatherList()
         val data = (actualResult as? Either.Right)?.success
 
         assertThat(actualResult.isRight).isTrue()
         assertThat(data != null).isTrue()
+    }
+
+    @Test
+    fun `for success city weather load remote`() = runTest {
+        enqueueData(generateSuccessResponse(fileReader.loadJsonAsString(SUCCESS_200_MOCK)))
+
+        val actualResult = repository.loadRemoteCityWeatherByName(cityName = TEST_CITY_NAME)
+        val data = (actualResult as? Either.Right)?.success
+
+        assertThat(actualResult.isRight).isTrue()
+        assertThat(data != null).isTrue()
+        assertThat(data?.cityName == TEST_CITY_NAME)
+    }
+
+    @Test
+    fun `for unauthorized response result`() = runTest {
+        enqueueData(generateFailureResponse(fileReader.loadJsonAsString(fileName = ERROR_UNAUTHORIZED_401_MOCK)))
+
+        val actualResult = repository.loadRemoteCityWeatherByName(cityName = TEST_CITY_NAME)
+        val data = (actualResult as? Either.Left)?.failure
+
+        assertThat(actualResult.isLeft).isTrue()
+        assertThat(data).isInstanceOf(ServerError.ServerCodeError::class.java)
+    }
+
+    @Test
+    fun `for city not found response result`() = runTest {
+        enqueueData(
+            generateFailureResponse(
+                body = fileReader.loadJsonAsString(fileName = ERROR_CITY_NOT_FOUND_404_MOCK),
+                error = HttpURLConnection.HTTP_NOT_FOUND
+            )
+        )
+
+        val actualResult = repository.loadRemoteCityWeatherByName(cityName = WRONG_TEST_CITY_NAME)
+        val data = (actualResult as? Either.Left)?.failure
+
+        assertThat(actualResult.isLeft).isTrue()
+        assertThat(data).isInstanceOf(ServerError.ServerCodeError::class.java)
+    }
+
+    @Test
+    fun `for delete city data by name`() = runTest {
+        repository.deleteLocalCity(TEST_CITY_NAME)
+        Mockito.verify(weatherDao).deleteWeatherDataByCityName(TEST_CITY_NAME)
+    }
+
+    companion object {
+        const val TEST_CITY_NAME = "Vienna"
+        const val WRONG_TEST_CITY_NAME = "WrongCityName"
     }
 }

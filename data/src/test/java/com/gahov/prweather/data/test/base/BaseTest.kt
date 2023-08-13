@@ -54,18 +54,6 @@ abstract class BaseTest : BaseTestConfig {
     }
 
     companion object {
-        fun generateSuccessDefaultResponse(): MockResponse {
-            return MockResponse().apply {
-                setResponseCode(HttpURLConnection.HTTP_NO_CONTENT)
-            }
-        }
-
-        fun generateFailureDefaultResponse(): MockResponse {
-            return MockResponse().apply {
-                setResponseCode(HttpURLConnection.HTTP_NOT_FOUND)
-            }
-        }
-
         fun generateSuccessResponse(jsonString: String): MockResponse {
             return MockResponse().apply {
                 setResponseCode(HttpURLConnection.HTTP_OK)
