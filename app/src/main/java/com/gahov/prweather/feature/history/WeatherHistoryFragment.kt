@@ -2,12 +2,16 @@ package com.gahov.prweather.feature.history
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gahov.prweather.R
 import com.gahov.prweather.arch.router.command.Command
 import com.gahov.prweather.arch.ui.fragment.BaseFragment
 import com.gahov.prweather.arch.ui.view.model.TextProvider
+import com.gahov.prweather.common.ui.AppBarOffsetChangeListener
 import com.gahov.prweather.databinding.FragmentCityHistoryBinding
 import com.gahov.prweather.feature.details.entity.WeatherDetailsDataModel
 import com.gahov.prweather.feature.history.adapter.WeatherHistoryAdapter
@@ -32,6 +36,7 @@ class WeatherHistoryFragment :
         viewModel.loadLocalWeatherHistory(args.cityName)
         binding.presenter = viewModel
         setupAdapter()
+        setupScrollingAnimation()
     }
 
     override fun handleFeatureCommand(command: Command.FeatureCommand) {
@@ -47,6 +52,37 @@ class WeatherHistoryFragment :
         }
     }
 
+    private fun setupScrollingAnimation() {
+        with(binding) {
+            historyListAppBarLayout.addOnOffsetChangedListener(object :
+                AppBarOffsetChangeListener() {
+                override fun onHide() {
+                    hideViews()
+                }
+
+                override fun onShow() {
+                    showViews()
+                }
+            })
+        }
+    }
+
+    private fun hideViews() {
+        binding.historyListToolbar.animate()
+            .translationY((-binding.historyListToolbar.height).toFloat()).interpolator =
+            AccelerateInterpolator(2F)
+    }
+
+    private fun showViews() {
+        if (!binding.historyListToolbar.isVisible) {
+            val valueInPixels = resources.getDimension(R.dimen.grid_56)
+            binding.historyListToolbar.y = -valueInPixels
+            binding.historyListToolbar.visibility = View.VISIBLE
+        }
+        binding.historyListToolbar.animate().translationY(0F).interpolator =
+            DecelerateInterpolator(2F)
+    }
+
     private fun setupAdapter() {
         binding.historyList.layoutManager = LinearLayoutManager(requireContext())
         binding.historyList.adapter = weatherHistoryAdapter
@@ -55,6 +91,6 @@ class WeatherHistoryFragment :
     private fun displayContent(content: List<WeatherDetailsDataModel>) {
         val cityName = args.cityName
         binding.title = TextProvider.Text(getString(R.string.city_history_title, cityName))
-        weatherHistoryAdapter.items = content.toMutableList()
+        weatherHistoryAdapter.items = content
     }
 }

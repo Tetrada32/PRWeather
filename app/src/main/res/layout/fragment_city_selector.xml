@@ -23,7 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/grid_130"
             android:background="@color/colorPrimary"
-            android:fitsSystemWindows="false">
+            android:fitsSystemWindows="false"
+            android:translationZ="@dimen/grid_1"
+            app:liftOnScroll="false">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/citiesSelectorCollapsingToolBarLayout"
@@ -74,6 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorPrimary"
+            android:translationZ="@dimen/grid_1"
             android:visibility="gone"
             tools:visibility="visible">
 

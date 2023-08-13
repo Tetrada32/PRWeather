@@ -53,6 +53,6 @@ class CityWeatherDetailsFragment :
 
     private fun displayContent(content: WeatherDetailsDataModel) {
         binding.model = content
-        weatherDetailsFieldsAdapter.items = content.weatherFields?.toMutableList()!!
+        weatherDetailsFieldsAdapter.items = content.weatherFields ?: emptyList()
     }
 }

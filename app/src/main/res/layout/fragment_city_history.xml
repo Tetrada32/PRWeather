@@ -32,7 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/grid_130"
             android:background="@color/colorPrimary"
-            android:fitsSystemWindows="false">
+            android:fitsSystemWindows="false"
+            android:translationZ="@dimen/grid_1">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/historyListCollapsingToolBarLayout"
@@ -85,21 +86,12 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorPrimary"
+            android:translationZ="@dimen/grid_1"
             android:visibility="gone"
-            tools:visibility="visible">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lato_regular"
-                android:includeFontPadding="false"
-                android:paddingStart="@dimen/grid_58"
-                android:paddingEnd="@dimen/grid_58"
-                android:textColor="@color/white"
-                tools:text="London Historical" />
-        </com.google.android.material.appbar.MaterialToolbar>
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/historyListBackButton"
             android:layout_width="@dimen/grid_56"
             android:layout_height="@dimen/grid_56"
             android:layout_marginStart="@dimen/grid_5"
@@ -107,6 +99,7 @@
             android:onClick="@{() -> presenter.onBackButtonClick()}"
             android:scaleType="fitXY"
             android:src="@drawable/ic_arrow_back"
+            android:translationZ="@dimen/grid_2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
