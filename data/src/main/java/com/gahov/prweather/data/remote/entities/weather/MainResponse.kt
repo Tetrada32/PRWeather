@@ -1,25 +1,25 @@
 package com.gahov.prweather.data.remote.entities.weather
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MainResponse(
-    @SerializedName("temp")
+class MainResponse(
+    @SerialName("temp")
     val temperature: Double? = null,
 
-    @SerializedName("feels_like")
+    @SerialName("feels_like")
     val feelsLike: Double? = null,
 
-    @SerializedName("temp_min")
+    @SerialName("temp_min")
     val tempMin: Double? = null,
 
-    @SerializedName("temp_max")
+    @SerialName("temp_max")
     val tempMax: Double? = null,
 
-    @SerializedName("pressure")
+    @SerialName("pressure")
     val pressure: Int? = null,
 
-    @SerializedName("humidity")
+    @SerialName("humidity")
     val humidity: Int? = null
 )

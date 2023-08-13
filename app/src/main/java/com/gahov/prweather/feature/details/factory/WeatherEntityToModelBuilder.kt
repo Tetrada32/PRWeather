@@ -30,7 +30,9 @@ class WeatherEntityToModelBuilder @Inject constructor(private val context: Conte
             locationName = TextProvider.Text("${entityItem.cityName}, ${entityItem.countryName}"),
             weatherIcon = IconProvider.Url(createIconUrl(entityItem.iconId)),
             weatherFields = createWeatherDetailsList(entityItem),
-            weatherDate = TextProvider.Text(createWeatherDateText(entityItem))
+            weatherDate = TextProvider.Text(createWeatherDateText(entityItem)),
+            requestTime = TextProvider.Text(entityItem.time.toString()),
+            mainTemperature = TextProvider.Text(createTemperatureText(entityItem.temperatureKelvin))
         )
     }
 
@@ -44,22 +46,34 @@ class WeatherEntityToModelBuilder @Inject constructor(private val context: Conte
 
                 temperatureField -> WeatherDetailsFieldModel(
                     TextProvider.Text(field),
-                    TextProvider.Text(kelvinToCelsius(weatherModel.temperatureKelvin).toString())
+                    TextProvider.Text(createTemperatureText(weatherModel.temperatureKelvin))
                 )
 
                 humidityField -> WeatherDetailsFieldModel(
                     TextProvider.Text(field),
-                    TextProvider.Text(weatherModel.humidity?.toString() ?: EMPTY)
+                    TextProvider.Text(createHumidityField(weatherModel.humidity))
                 )
 
                 windspeedField -> WeatherDetailsFieldModel(
                     TextProvider.Text(field),
-                    TextProvider.Text(weatherModel.windSpeed?.toString() ?: EMPTY)
+                    TextProvider.Text(createWindSpeedField(weatherModel.windSpeed))
                 )
 
                 else -> WeatherDetailsFieldModel()
             }
         }
+    }
+
+    private fun createWindSpeedField(windSpeed: Double?): String {
+        return context.getString(R.string.wind_speed, windSpeed?.toInt())
+    }
+
+    private fun createHumidityField(humidity: Int?): String {
+        return "$humidity%"
+    }
+
+    private fun createTemperatureText(temp: Double?): String {
+        return context.getString(R.string.temperature_with_celsius, kelvinToCelsius(temp))
     }
 
     private fun kelvinToCelsius(temp: Double?): Int? {

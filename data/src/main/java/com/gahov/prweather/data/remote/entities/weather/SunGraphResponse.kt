@@ -1,22 +1,22 @@
 package com.gahov.prweather.data.remote.entities.weather
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class SunGraphResponse(
-    @SerializedName("type")
+    @SerialName("type")
     val type: Int? = null,
 
-    @SerializedName("id")
+    @SerialName("id")
     val id: Int? = null,
 
-    @SerializedName("country")
+    @SerialName("country")
     val country: String? = null,
 
-    @SerializedName("sunrise")
+    @SerialName("sunrise")
     val sunrise: Long? = null,
 
-    @SerializedName("sunset")
+    @SerialName("sunset")
     val sunset: Long? = null
 )

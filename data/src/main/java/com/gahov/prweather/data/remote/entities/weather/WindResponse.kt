@@ -1,16 +1,16 @@
 package com.gahov.prweather.data.remote.entities.weather
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class WindResponse(
-    @SerializedName("speed")
+    @SerialName("speed")
     val speed: Double? = null,
 
-    @SerializedName("deg")
+    @SerialName("deg")
     val deg: Int? = null,
 
-    @SerializedName("gust")
+    @SerialName("gust")
     val gust: Double? = null
 )

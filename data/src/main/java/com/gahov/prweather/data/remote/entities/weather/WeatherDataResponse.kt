@@ -1,46 +1,47 @@
 package com.gahov.prweather.data.remote.entities.weather
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class WeatherDataResponse(
-    @SerializedName("coord")
+    @SerialName("coord")
     val coordinates: CoordinatesResponse? = null,
 
-    @SerializedName("weather")
+    @SerialName("weather")
     val weather: List<WeatherResponse>? = null,
 
-    @SerializedName("base")
+    @SerialName("base")
     val base: String? = null,
 
-    @SerializedName("main")
+    @SerialName("main")
     val main: MainResponse? = null,
 
-    @SerializedName("visibility")
+    @SerialName("visibility")
     val visibility: Int? = null,
 
-    @SerializedName("wind")
+    @SerialName("wind")
     val wind: WindResponse? = null,
 
-    @SerializedName("clouds")
+    @SerialName("clouds")
     val clouds: CloudsResponse? = null,
 
-    @SerializedName("dt")
+    @SerialName("dt")
     val dt: Long? = null,
 
-    @SerializedName("sys")
+    @SerialName("sys")
     val sys: SunGraphResponse? = null ,
 
-    @SerializedName("timezone")
+    @SerialName("timezone")
     val timezone: Int? = null,
 
-    @SerializedName("id")
+    @SerialName("id")
     val id: Int? = null,
 
-    @SerializedName("name")
+    @SerialName("name")
     val name: String? = null,
 
-    @SerializedName("cod")
+    @SerialName("cod")
     val code: Int? = null
 )

@@ -1,19 +1,20 @@
 package com.gahov.prweather.data.remote.entities.weather
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class WeatherResponse(
-    @SerializedName("id")
+    @SerialName("id")
     val id: Int? = null,
 
-    @SerializedName("main")
+    @SerialName("main")
     val main: String? = null,
 
-    @SerializedName("description")
+    @SerialName("description")
     val description: String? = null,
 
-    @SerializedName("icon")
+    @SerialName("icon")
     val icon: String? = null
 )

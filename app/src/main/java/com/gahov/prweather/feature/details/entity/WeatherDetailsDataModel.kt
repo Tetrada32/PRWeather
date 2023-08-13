@@ -10,4 +10,5 @@ data class WeatherDetailsDataModel(
     val mainTemperature: TextProvider?= null,
     val weatherFields: List<WeatherDetailsFieldModel>? = null,
     val weatherDate: TextProvider? = null,
+    val requestTime: TextProvider? = null
 )

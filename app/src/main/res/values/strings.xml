@@ -8,4 +8,6 @@
     <string name="field_weather_date">Weather information for %1$s received on\n%2$s</string>
     <string name="button_add_city">Add city</string>
     <string name="field_search_for_cities">Search for cities</string>
+    <string name="temperature_with_celsius">%1$d °C</string>
+    <string name="wind_speed">%1$d km/h</string>
 </resources>
