@@ -9,8 +9,6 @@ import com.gahov.prweather.domain.entities.common.Either
 import com.gahov.prweather.domain.entities.failure.Failure
 import com.gahov.prweather.domain.entities.weather.WeatherEntity
 import com.gahov.prweather.domain.repository.weather.WeatherRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class ImplWeatherRepository constructor(
     private val remoteSource: WeatherRemoteSource,
@@ -33,10 +31,8 @@ class ImplWeatherRepository constructor(
     }
 
     override suspend fun saveCityWeatherData(weather: WeatherEntity) {
-        withContext(Dispatchers.IO) {
-            val mappedItem = weatherLocalMapper.toDatabase(weather)
-            localSource.saveWeather(mappedItem)
-        }
+        val mappedItem = weatherLocalMapper.toDatabase(weather)
+        localSource.saveWeather(mappedItem)
     }
 
     override suspend fun getCitiesWeatherList(cityName: String): Either<Failure, List<WeatherEntity>> {
@@ -47,5 +43,10 @@ class ImplWeatherRepository constructor(
             e.printStackTrace()
             Either.Left(Failure.Common(e.fillInStackTrace()))
         }
+    }
+
+    override suspend fun deleteLocalCity(cityName: String): Either<Failure, List<WeatherEntity>> {
+        localSource.deleteAllWeatherData(cityName)
+        return getCitiesWeatherList()
     }
 }

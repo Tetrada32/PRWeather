@@ -1,6 +1,7 @@
 package com.gahov.prweather.arch.di.module
 
 import com.gahov.prweather.domain.repository.weather.WeatherRepository
+import com.gahov.prweather.domain.usecase.weather.DeleteLocalCityUseCase
 import com.gahov.prweather.domain.usecase.weather.LoadRemoteCityWeatherUseCase
 import com.gahov.prweather.domain.usecase.weather.LocalCityWeatherListUseCase
 import dagger.Module
@@ -26,6 +27,14 @@ class UseCaseModule {
     internal fun provideLocalCityWeatherListUseCase(
         weatherRepository: WeatherRepository
     ) = LocalCityWeatherListUseCase(
+        repository = weatherRepository
+    )
+
+    @Provides
+    @Singleton
+    internal fun provideDeleteLocalCityUseCase(
+        weatherRepository: WeatherRepository
+    ) = DeleteLocalCityUseCase(
         repository = weatherRepository
     )
 }

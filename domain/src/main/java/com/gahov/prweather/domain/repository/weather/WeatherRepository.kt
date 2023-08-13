@@ -13,4 +13,6 @@ interface WeatherRepository {
 
     suspend fun getCitiesWeatherList(cityName: String = ""): Either<Failure, List<WeatherEntity>>
 
+    suspend fun deleteLocalCity(cityName: String): Either<Failure, List<WeatherEntity>>
+
 }

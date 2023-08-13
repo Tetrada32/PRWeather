@@ -5,13 +5,16 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gahov.prweather.R
 import com.gahov.prweather.arch.router.command.Command
 import com.gahov.prweather.arch.ui.fragment.BaseFragment
 import com.gahov.prweather.common.ui.AppBarOffsetChangeListener
 import com.gahov.prweather.databinding.FragmentCitySelectorBinding
 import com.gahov.prweather.feature.selector.adapter.CityListAdapter
+import com.gahov.prweather.feature.selector.adapter.viewholder.CityViewHolder
 import com.gahov.prweather.feature.selector.command.CitySelectorCommand
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,6 +35,7 @@ class CitySelectorFragment :
 
         setupScrollingAnimation()
         setupAdapter()
+        setupSwipeToDeleteItemGesture()
     }
 
     override fun handleFeatureCommand(command: Command.FeatureCommand) {
@@ -84,5 +88,20 @@ class CitySelectorFragment :
         }
         binding.citiesSelectorToolbar.animate().translationY(0F).interpolator =
             DecelerateInterpolator(2F)
+    }
+
+    private fun setupSwipeToDeleteItemGesture() {
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                v: RecyclerView,
+                h: RecyclerView.ViewHolder,
+                t: RecyclerView.ViewHolder
+            ) = false
+
+            override fun onSwiped(h: RecyclerView.ViewHolder, dir: Int) {
+                viewModel.deleteItem((h as CityViewHolder).item.cityName)
+                cityListAdapter.removeAt(h.adapterPosition)
+            }
+        }).attachToRecyclerView(binding.citiesSelectorList)
     }
 }

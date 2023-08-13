@@ -19,4 +19,8 @@ class ImplWeatherLocalSource(
             return weatherDao.select()
         }
     }
+
+    override suspend fun deleteAllWeatherData(cityName: String) {
+        weatherDao.deleteWeatherDataByCityName(cityName)
+    }
 }

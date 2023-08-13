@@ -2,7 +2,9 @@ package com.gahov.prweather.feature.selector
 
 import com.gahov.prweather.arch.controller.BaseViewModel
 import com.gahov.prweather.domain.entities.common.Either
+import com.gahov.prweather.domain.entities.weather.CityWeatherParams
 import com.gahov.prweather.domain.entities.weather.WeatherEntity
+import com.gahov.prweather.domain.usecase.weather.DeleteLocalCityUseCase
 import com.gahov.prweather.domain.usecase.weather.LocalCityWeatherListUseCase
 import com.gahov.prweather.feature.selector.command.CitySelectorCommand
 import com.gahov.prweather.feature.selector.factory.CityEntityBuilder
@@ -12,7 +14,8 @@ import javax.inject.Inject
 
 class CitySelectorViewModel @Inject constructor(
     private val cityEntityBuilder: CityEntityBuilder,
-    private val loadLocalWeatherListUseCase: LocalCityWeatherListUseCase
+    private val loadLocalWeatherListUseCase: LocalCityWeatherListUseCase,
+    private val deleteLocalCityUseCase: DeleteLocalCityUseCase,
 ) : BaseViewModel(), CitySelectorPresenter {
 
     init {
@@ -53,5 +56,11 @@ class CitySelectorViewModel @Inject constructor(
                 cityName
             )
         )
+    }
+
+    fun deleteItem(cityName: String) {
+        launch(Dispatchers.IO) {
+            deleteLocalCityUseCase.execute(CityWeatherParams(cityName))
+        }
     }
 }

@@ -41,4 +41,9 @@ abstract class BaseRecyclerListAdapter<T : Any> :
     override fun onBindViewHolder(holder: BaseViewHolder<T, out ViewDataBinding>, position: Int) {
         holder.bindView(position, getItem(position))
     }
+
+    fun removeAt(index: Int) {
+        items.toMutableList().removeAt(index)
+        notifyItemRemoved(index)
+    }
 }
