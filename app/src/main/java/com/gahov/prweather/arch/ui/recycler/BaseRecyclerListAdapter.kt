@@ -9,6 +9,13 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 
+/**
+ * An abstract base class for creating RecyclerView ListAdapters with simplified item management
+ * and view binding.
+ *
+ * @param T The type of items to be displayed in the adapter.
+ * @property items The list of items to be displayed in the adapter.
+ */
 abstract class BaseRecyclerListAdapter<T : Any> :
     ListAdapter<T, BaseViewHolder<T, out ViewDataBinding>> {
 
@@ -42,6 +49,11 @@ abstract class BaseRecyclerListAdapter<T : Any> :
         holder.bindView(position, getItem(position))
     }
 
+    /**
+     * Removes the item at the specified [index] from the list of items.
+     *
+     * @param index The index of the item to be removed.
+     */
     fun removeAt(index: Int) {
         if (index in items.indices) {
             val newItems = items.toMutableList()

@@ -28,6 +28,16 @@ import com.gahov.prweather.domain.entities.failure.Failure
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import javax.inject.Inject
 
+/**
+ * An abstract base class for creating BottomSheetDialogFragments that are integrated with ViewModel,
+ * DataBinding, and navigation functionality.
+ *
+ * @param T The type of ViewModel associated with the fragment.
+ * @param B The type of ViewDataBinding associated with the fragment.
+ * @property layoutId The resource ID of the layout to be inflated.
+ * @property viewModelClass The class of the associated ViewModel.
+ */
+
 abstract class BaseBottomSheetFragment<T : ViewModel, B : ViewDataBinding>(
     @LayoutRes private val layoutId: Int,
     private val viewModelClass: Class<T>
@@ -47,6 +57,9 @@ abstract class BaseBottomSheetFragment<T : ViewModel, B : ViewDataBinding>(
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    /**
+     * The Router instance responsible for navigation within the fragment.
+     */
     override val router: Router by lazy {
         NavComponentRouter(
             navController = findNavController(),

@@ -9,6 +9,14 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 
+/**
+ * An implementation of the [CoroutineLauncher] interface that provides a way to launch coroutines
+ * with error handling for potential failures.
+ *
+ * @param scope The [CoroutineScope] on which the coroutines will be launched.
+ * @param handleFailure An optional lambda function to handle failures that occur within the launched coroutine.
+ */
+
 class DefaultCoroutineLauncher(
     private val scope: CoroutineScope,
     private val handleFailure: ((Failure) -> Unit)? = null

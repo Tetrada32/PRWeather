@@ -8,6 +8,12 @@ import com.gahov.prweather.arch.router.command.Command
 import com.gahov.prweather.arch.router.command.NavDirection
 import com.gahov.prweather.domain.component.logger.Logger
 
+/**
+ * A navigation component router implementation that uses a NavController to manage navigation in the app.
+ *
+ * @param navController The NavController instance for managing navigation.
+ * @param logger The Logger instance for logging navigation events.
+ */
 open class NavComponentRouter(
     private val navController: NavController,
     private val logger: Logger

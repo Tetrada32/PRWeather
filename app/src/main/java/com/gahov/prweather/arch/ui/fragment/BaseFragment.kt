@@ -28,6 +28,15 @@ import com.gahov.prweather.domain.component.logger.Logger
 import com.gahov.prweather.domain.entities.failure.Failure
 import javax.inject.Inject
 
+/**
+ * An abstract base class for creating Fragments with integrated ViewModel, DataBinding, and navigation functionality.
+ *
+ * @param B The type of ViewDataBinding associated with the fragment.
+ * @param T The type of ViewModel associated with the fragment.
+ * @property contentLayoutID The resource ID of the layout to be inflated.
+ * @property viewModelClass The class of the associated ViewModel.
+ */
+
 abstract class BaseFragment<B : ViewDataBinding, T : ViewModel>(
     @LayoutRes private val contentLayoutID: Int,
     private val viewModelClass: Class<T>,
@@ -47,6 +56,9 @@ abstract class BaseFragment<B : ViewDataBinding, T : ViewModel>(
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    /**
+     * The Router instance responsible for navigation within the fragment.
+     */
     override val router: Router by lazy {
         NavComponentRouter(
             navController = findNavController(),

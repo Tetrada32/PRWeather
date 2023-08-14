@@ -3,12 +3,23 @@ package com.gahov.prweather.common.ui
 import com.google.android.material.appbar.AppBarLayout
 import kotlin.math.abs
 
+/**
+ * An abstract class that implements the AppBarLayout.OnOffsetChangedListener interface to provide
+ * a listener
+ * for tracking the offset changes of an AppBarLayout.
+ */
 abstract class AppBarOffsetChangeListener : AppBarLayout.OnOffsetChangedListener {
 
     private var mMaxScrollSize = 0
 
     private var mIsElementNotHidden = true
 
+    /**
+     * Called when the offset of the AppBarLayout changes.
+     *
+     * @param appBarLayout The AppBarLayout instance.
+     * @param verticalOffset The vertical offset of the AppBarLayout.
+     */
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
         if (mMaxScrollSize == 0) {
             if (appBarLayout != null) {

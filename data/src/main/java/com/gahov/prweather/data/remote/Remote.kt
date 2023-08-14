@@ -13,6 +13,12 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 import java.net.UnknownHostException
 
+/**
+ * Executes a network call and handles the response to return an [Either] result.
+ *
+ * @param call The suspend function representing the network call.
+ * @return An [Either] result, either containing a successful response body [T] or a failure [ServerError].
+ */
 suspend inline fun <T : Any> call(
     crossinline call: suspend () -> Response<T>,
 ): Either<Failure, T> {

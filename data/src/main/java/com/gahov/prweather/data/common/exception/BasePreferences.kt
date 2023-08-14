@@ -3,8 +3,20 @@ package com.gahov.prweather.data.common.exception
 import android.content.SharedPreferences
 import java.io.IOException
 
+/**
+ * An abstract base class for managing preferences using SharedPreferences.
+ *
+ * @param sharedPreferences The [SharedPreferences] instance used for managing preferences.
+ */
 abstract class BasePreferences(private val sharedPreferences: SharedPreferences) {
 
+    /**
+     * Saves a value into SharedPreferences using the provided key.
+     *
+     * @param key The key associated with the value to be saved.
+     * @param value The value to be saved.
+     * @throws IOException If an unsupported type is encountered for the value.
+     */
     @Suppress("UNCHECKED_CAST")
     @Throws(IOException::class)
     protected fun <T> put(key: String, value: T) {
@@ -21,6 +33,14 @@ abstract class BasePreferences(private val sharedPreferences: SharedPreferences)
         editor.apply()
     }
 
+    /**
+     * Retrieves a value from SharedPreferences using the provided key with a default value.
+     *
+     * @param key The key associated with the value to be retrieved.
+     * @param default The default value to be returned if the key is not found.
+     * @return The retrieved value or the default value.
+     * @throws IOException If an unsupported type is encountered for the default value.
+     */
     @Suppress("UNCHECKED_CAST")
     @Throws(IOException::class)
     protected fun <T> get(key: String, default: T): T {

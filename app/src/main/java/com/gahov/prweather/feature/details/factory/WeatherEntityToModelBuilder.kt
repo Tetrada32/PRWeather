@@ -9,10 +9,18 @@ import com.gahov.prweather.feature.details.entity.WeatherDetailsDataModel
 import com.gahov.prweather.feature.details.entity.WeatherDetailsFieldModel
 import javax.inject.Inject
 
+/**
+ * A class responsible for building a WeatherDetailsDataModel from a WeatherEntity.
+ *
+ * @param context The application context used for resource access.
+ */
 
 class WeatherEntityToModelBuilder @Inject constructor(private val context: Context) :
     WeatherEntityBuilder {
 
+    /**
+     * Fields used to represent the weather details information.
+     */
     private val descriptionField = context.getString(R.string.field_description)
     private val temperatureField = context.getString(R.string.field_temperature)
     private val humidityField = context.getString(R.string.field_humidity)
@@ -25,6 +33,12 @@ class WeatherEntityToModelBuilder @Inject constructor(private val context: Conte
         windspeedField
     )
 
+    /**
+     * Builds a WeatherDetailsDataModel from the provided WeatherEntity.
+     *
+     * @param entityItem The WeatherEntity to be converted to a WeatherDetailsDataModel.
+     * @return The WeatherDetailsDataModel representing the data from the WeatherEntity.
+     */
     override fun buildWeatherModel(entityItem: WeatherEntity): WeatherDetailsDataModel {
         return WeatherDetailsDataModel(
             id = entityItem.id,

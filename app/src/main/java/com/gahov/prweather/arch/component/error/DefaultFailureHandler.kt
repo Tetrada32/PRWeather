@@ -8,6 +8,13 @@ import com.gahov.prweather.domain.component.logger.Logger
 import com.gahov.prweather.domain.entities.failure.Failure
 import com.gahov.prweather.domain.entities.failure.ServerError
 
+/**
+ * A class responsible for handling and parsing different types of failures and displaying
+ * appropriate error messages.
+ *
+ * @param context The application context used for displaying error messages.
+ * @param logger The logger used for logging errors.
+ */
 open class DefaultFailureHandler(
     private val context: Context,
     private val logger: Logger

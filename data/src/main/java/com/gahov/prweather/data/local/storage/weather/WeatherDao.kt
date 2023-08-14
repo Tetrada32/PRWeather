@@ -6,6 +6,10 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.gahov.prweather.data.local.entities.WeatherDTO
 
+/**
+ * Data Access Object (DAO) interface for managing weather data in the database (local storage).
+ */
+
 @Dao
 interface WeatherDao {
 
@@ -13,7 +17,7 @@ interface WeatherDao {
     fun insertItems(cityWeatherList: List<WeatherDTO>)
 
     @Query("SELECT * FROM weatherData")
-    fun select() : List<WeatherDTO>
+    fun select(): List<WeatherDTO>
 
     @Query("SELECT * FROM weatherData WHERE cityName = :cityName")
     fun getWeatherDataByCityName(cityName: String): List<WeatherDTO>

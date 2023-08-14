@@ -1,8 +1,26 @@
 package com.gahov.prweather.data.remote.entities.weather
 
-import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
+/**
+ * A data class representing weather data from an API response.
+ * It is the main API response POJO.
+ *
+ * @property coordinates The coordinates of the location.
+ * @property weather The list of weather conditions.
+ * @property base The base parameter of the API response.
+ * @property main The main weather data details.
+ * @property visibility The visibility value.
+ * @property wind The wind information.
+ * @property clouds The cloud information.
+ * @property dt The date and time of the data.
+ * @property sys The sun and graph data.
+ * @property timezone The timezone offset.
+ * @property id The ID of the data.
+ * @property name The name of the location.
+ * @property code The response code.
+ */
 
 @Serializable
 data class WeatherDataResponse(

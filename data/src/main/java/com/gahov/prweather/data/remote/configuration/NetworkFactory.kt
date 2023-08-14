@@ -5,11 +5,23 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
+/**
+ * A factory class for creating network services using Retrofit and OkHttpClient.
+ *
+ * @param configuration The network configuration settings.
+ * @param interceptor The interceptor provider for adding interceptors.
+ */
 class NetworkFactory(
     private val configuration: NetworkConfiguration,
     private val interceptor: InterceptorProvider,
 ) {
 
+    /**
+     * Creates a service implementation for the given protocol using Retrofit.
+     *
+     * @param protocol The protocol interface to be implemented.
+     * @return An instance of the service implementation.
+     */
     private fun <S> createService(protocol: Class<S>): S {
         return retrofit.create(protocol)
     }
@@ -35,6 +47,14 @@ class NetworkFactory(
         }.build()
 
     companion object {
+        /**
+         * Creates a service implementation for the given protocol using the factory.
+         *
+         * @param protocol The protocol interface to be implemented.
+         * @param configuration The network configuration settings.
+         * @param interceptors The interceptor provider for adding interceptors.
+         * @return An instance of the service implementation.
+         */
         fun <S> createService(
             protocol: Class<S>,
             configuration: NetworkConfiguration,

@@ -7,6 +7,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
+/**
+ * Module for providing application-wide dependencies.
+ */
 
 @Module(
     includes = [
@@ -24,6 +27,12 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
+    /**
+     * Provides the application context.
+     *
+     * @param application The application instance.
+     * @return The application context.
+     */
     @Provides
     internal fun provideApplicationContext(application: Application): Context {
         return application.applicationContext

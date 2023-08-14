@@ -8,6 +8,11 @@ import dagger.Component
 import dagger.MembersInjector
 import javax.inject.Singleton
 
+/**
+ * Dagger component interface responsible for injecting dependencies into the [PlanRadarWeatherApplication] class.
+ * This component uses the [AppModule] module to provide necessary dependencies.
+ */
+
 @Singleton
 @Component(
     modules = [

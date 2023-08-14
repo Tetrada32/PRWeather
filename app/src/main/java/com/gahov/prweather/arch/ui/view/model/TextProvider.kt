@@ -2,6 +2,10 @@ package com.gahov.prweather.arch.ui.view.model
 
 import androidx.annotation.StringRes
 
+/**
+ * A sealed class representing different ways to provide text content for various UI elements.
+ */
+
 sealed class TextProvider {
     data class Text(val text: String = "") : TextProvider()
     data class ResText(@StringRes val text: Int = 0) : TextProvider()

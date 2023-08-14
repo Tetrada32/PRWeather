@@ -7,6 +7,10 @@ import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Converter
 
+/**
+ * A class providing a converter factory for handling JSON serialization and deserialization
+ * using Kotlin serialization.
+ */
 class KotlinConverterFactory : ConverterFactoryProvider {
 
     private val contentType: MediaType by lazy { "application/json".toMediaType() }

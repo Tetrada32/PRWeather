@@ -3,6 +3,12 @@ package com.gahov.prweather.data.local.storage.authorization
 import android.content.SharedPreferences
 import com.gahov.prweather.data.common.exception.BasePreferences
 
+/** An implementation of the [AuthorizationLocalStorage] interface for managing access token storage
+ *  using SharedPreferences.
+ *
+ * @param preferences The [SharedPreferences] instance used for managing preferences.
+ */
+
 class ImplAuthorizationLocalStorage(
     preferences: SharedPreferences,
 ) : AuthorizationLocalStorage, BasePreferences(preferences) {
