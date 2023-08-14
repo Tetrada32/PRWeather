@@ -84,4 +84,11 @@ dependencies {
 
     androidTestImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test:runner:1.5.2")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("com.squareup.okhttp3:mockwebserver3:5.0.0-alpha.9")
+    testImplementation("org.mockito:mockito-core:4.8.1")
+    testImplementation("org.mockito:mockito-inline:4.8.1")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation("com.google.truth:truth:1.1.3")
 }
