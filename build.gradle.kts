@@ -1,21 +1,21 @@
 buildscript {
-    val kotlinVersion by extra("1.9.0")
+    val kotlinVersion by extra("2.1.10")
 
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:8.1.0")
+        classpath("com.android.tools.build:gradle:8.9.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.0")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.8.8")
     }
 }
 
 plugins {
-    id("com.google.dagger.hilt.android") version "2.47" apply false
-    id("org.jetbrains.kotlin.android") version "1.9.0" apply false
+    id("com.google.dagger.hilt.android") version "2.55" apply false
+    id("org.jetbrains.kotlin.android") version "2.1.10" apply false
 }
 
 allprojects {

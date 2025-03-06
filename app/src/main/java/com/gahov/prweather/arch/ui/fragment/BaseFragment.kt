@@ -48,10 +48,10 @@ abstract class BaseFragment<B : ViewDataBinding, T : ViewModel>(
     protected lateinit var viewModel: T
 
     @Inject
-    protected open lateinit var logger: Logger
+    open lateinit var logger: Logger
 
     @Inject
-    protected open lateinit var failureHandler: ErrorHandler
+    open lateinit var failureHandler: ErrorHandler
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

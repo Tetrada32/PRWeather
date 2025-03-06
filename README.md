@@ -46,10 +46,10 @@ Main technologies and libraries:
 
 ## Requirements
 - Android Studio version "Giraffe" | 2022.3.1 or later
-- JDK version 17
-- Kotlin version 1.9.0
+- JDK version 11
+- Kotlin version 1.9.20
 - Gradle version 8 or later
-- Android SDK version 33
+- Android SDK version 35
 
 Android Studio and all required tools can be downloaded here: 
 `https://developer.android.com/studio`
